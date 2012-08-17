@@ -1,0 +1,15 @@
+{
+    "name": "shifter",
+    "description": "New YUI build tool based on Gearjs, so let's shift some gears",
+    "version": "0.0.1",
+    "dependencies": {
+        "colors": "*",
+        "gear": ">= 0.7.0",
+        "gear-lib": ">= 0.7.0",
+        "yuitest-coverage": ">0.0.2",
+        "yuicompressor": "*"
+    },
+    "bin": {
+        "shifter": "./bin/shifter"
+    }
+}
