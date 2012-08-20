@@ -8,7 +8,9 @@
         "gear-lib": ">= 0.7.0",
         "nopt": "*",
         "yuitest-coverage": ">0.0.2",
-        "yuicompressor": "*"
+        "yuicompressor": "*",
+        "yui-lint": "*",
+        "jslint": "*"
     },
     "bin": {
         "shifter": "./bin/shifter"
