@@ -1,7 +1,7 @@
 Shifter - Blazingly Fast YUI Builder
 ====================================
 
-The purpose of this project is to replace YUI's use of our old ant [https://github.com/yui/builder](Builder).
+The purpose of this project is to replace YUI's use of our old ant [Builder](https://github.com/yui/builder).
 
 We have out grown our old builder, so it was time to build a new one!
 
@@ -32,4 +32,4 @@ file and have Shifter regenerate it after your issue is fixed.
 GearJS
 ------
 
-Shifter is built using [http://gearjs.org/](GearJS)
+Shifter is built using [GearJS](http://gearjs.org/)
