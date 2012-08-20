@@ -5,6 +5,25 @@ The purpose of this project is to replace YUI's use of our old ant [Builder](htt
 
 We have out grown our old builder, so it was time to build a new one!
 
+Install
+-------
+
+    npm -g install shifter
+
+Options
+-------
+
+    $ shifter -h
+    shifter@0.0.1
+
+    pass no arguments and shifter will build the module from the current directory
+
+       -v/--version            show version
+       -h/--help               show this stuff
+       -m/--modules <module>   limit the modules to build (array: -m foo -m bar)
+       --lint [prefered|defaults|strict] lint mode: https://github.com/yui/yui-lint
+       --strict                add "use strict" to module wrapper
+
 Usage
 -----
 
