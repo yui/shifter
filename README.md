@@ -24,6 +24,7 @@ Options
        -m/--modules <module>   limit the modules to build (array: -m foo -m bar)
        --lint [preferred|defaults|strict] (preferred is the default) lint mode: https://github.com/yui/yui-lint
        --strict                add "use strict" to module wrapper
+       --walk                  Walk the current directory and shift all builds. (cd yui3/src && shifter --walk)
 
 Usage
 -----
