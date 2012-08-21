@@ -14,14 +14,15 @@ Options
 -------
 
     $ shifter -h
-    shifter@0.0.1
+
+    blazingly fast builds with shifter@0.0.4
 
     pass no arguments and shifter will build the module from the current directory
 
        -v/--version            show version
        -h/--help               show this stuff
        -m/--modules <module>   limit the modules to build (array: -m foo -m bar)
-       --lint [prefered|defaults|strict] lint mode: https://github.com/yui/yui-lint
+       --lint [preferred|defaults|strict] (preferred is the default) lint mode: https://github.com/yui/yui-lint
        --strict                add "use strict" to module wrapper
 
 Usage
