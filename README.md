@@ -25,6 +25,7 @@ Options
        --lint [preferred|defaults|strict] (preferred is the default) lint mode: https://github.com/yui/yui-lint
        --strict                add "use strict" to module wrapper
        --walk                  Walk the current directory and shift all builds. (cd yui3/src && shifter --walk)
+                                   -m/--modules also supported here for filtering
 
 Usage
 -----
