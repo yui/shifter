@@ -10,7 +10,8 @@
         "yuitest-coverage": ">=0.0.4",
         "yuicompressor": "2.4.7",
         "yui-lint": "*",
-        "jslint": "*"
+        "jslint": "*",
+        "watch": "*"
     },
     "bin": {
         "shifter": "./bin/shifter"
