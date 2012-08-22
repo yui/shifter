@@ -5,6 +5,11 @@ The purpose of this project is to replace YUI's use of our old ant [Builder](htt
 
 We have out grown our old builder, so it was time to build a new one!
 
+Documentation
+-------------
+
+[Documentation can be found here](http://davglass.github.com/shifter/)
+
 Install
 -------
 
