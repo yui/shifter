@@ -13,6 +13,9 @@
         "jslint": "*",
         "watch": "*"
     },
+    "devDependencies": {
+        "selleck": "*"
+    },
     "bin": {
         "shifter": "./bin/shifter"
     }

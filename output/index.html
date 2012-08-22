@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>shifter</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/vendor/prettify/prettify-min.css">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+    <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui.js"></script>
+</head>
+<body>
+<a href="https://github.com/davglass/shifter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+<div id="doc">
+    <div id="hd">
+        <h1><img src="http://yuilibrary.com/img/yui-logo.png"> shifter</h1>
+    </div>
+    
+        <a href="#toc" class="jump">Jump to Table of Contents</a>
+    
+
+    <div class="yui3-g">
+        <div class="yui3-u-3-4">
+            <div id="main">
+                <div class="content"><h2 id="welcome-to-shifter-006">welcome to shifter 0.0.6!</h2>
+
+<div class="intro">
+shifter - blazingly fast yui builder
+</div>
+
+<h2 id="what">what is shifter?</h2>
+
+<p>The purpose of this project is to replace YUI's use of our old ant <a href="https://github.com/yui/builder">Builder</a>.</p>
+<p>We have out grown our old builder, so it was time to build a new one!</p>
+
+
+<h2 id="#install">installation and usage</h2>
+
+<ol>
+    <li>download and install <a href="http://nodejs.org/#download">node.js</a></li>
+    <li>run <code>npm -g install shifter</code></li>
+    <li>run <code>shifter</code> from inside the of a module inside the <a href="https://github.com/yui/yui3">yui3 git repo</a> or the <a href="https://github.com/yui/yui3-gallery">yui3-gallery repo</a>.</li>
+</ol>
+
+<h2 id="help">command line arguments</h2>
+
+<p>below is a simple list of commands that <code>shifter</code> supports.</p>
+
+<pre class="code terminal"><span class="noselect">$ </span>shifter -h
+
+blazingly fast builds with shifter@0.0.4
+
+pass no arguments and shifter will build the module from the current directory
+
+   -v&#x2F;--version            show version
+   -h&#x2F;--help               show this stuff
+   -m&#x2F;--modules &lt;module&gt;   limit the modules to build (array: -m foo -m bar)
+   --lint [preferred|defaults|strict] (preferred is the default) lint mode: https:&#x2F;&#x2F;github.com&#x2F;yui&#x2F;yui-lint
+   --strict                add &quot;use strict&quot; to module wrapper
+   --walk                  Walk the current directory and shift all builds. (cd yui3&#x2F;src &amp;&amp; shifter --walk)
+                               -m&#x2F;--modules also supported here for filtering
+   --watch                 Watch the current module and rebuild on file change (if meta file, a loader build will launch)
+                               --quiet to mute stdout from sub build</pre>
+
+
+<h2 id="info">what does it do?</h2>
+
+<p><code>shifter</code> will parse your current <code>*.properties</code> files and convert them into a <code>build.json</code> file that
+it can process. It only imports the relevant settings required to build the module.</p>
+
+<p><strong>It does not import module meta-data</strong> (see the <a href="#meta">meta-data for more information</a></p>
+
+<p>Instead, shifter parses the meta-data from the modules <code>meta&#x2F;*.json</code> files and uses that instead.
+So you don't have to declare your meta-data in more than one place now.</p>
+
+<h2 id="migrating">migrating to shifter</h2>
+
+<p><code>shifter</code> is designed to work side by side with our current builder (for now) so you don't have to
+switch over to using it fully if it doesn't work properly for you. Just don't delete your <code>*.properties</code>
+files until you are sure that Shifter builds your module properly. If it doesn't, file a ticket and
+we'll get it fixed up ASAP.</p>
+
+<p><code>shifter</code> will read a <code>build.json</code> file if it exists, if one doesn't and it finds a <code>*.properties</code> file
+it will generate the <code>build.json</code> from them. So if you have issues with the build, just delete the <code>build.json</code>
+file and have Shifter regenerate it after your issue is fixed.</p>
+
+<h2 id="watch">watching and building</h2>
+
+<p><code>shifter</code> can watch your module for changes and build for you. It will only watch files in the
+<code>.&#x2F;js</code>, <code>.&#x2F;css</code>, <code>.&#x2F;assets</code> and <code>.&#x2F;meta</code> directories. If a file is changed, it will rebuild the current
+module. If a meta file is changes, <code>Loader</code> will also be built (<strong>requires latest YUI source code</strong>).</p>
+
+<h2 id="meta">meta-data</h2>
+
+<p>One of the goals of <code>shifter</code> was to remove the need for duplicating <code>Loader</code> meta-data. This includes:</p>
+
+<pre class="code prettyprint">component.requires=classnamemanager, pjax-base
+component.use=foo,bar,baz
+component.skinnable=true</pre>
+
+
+<p>These properties were also being redefined in the modules <code>meta&#x2F;&lt;module&gt;.json</code> file to be included when <code>Loader</code> was built.</p>
+
+<p>When <code>shifter</code> parses the <code>build.json</code> file, it will attempt to gather <code>Loader</code> meta-data from the corresponding <code>meta&#x2F;*.json</code>
+files and munge them together into the data it needs to properly build the module.</p>
+
+<p>
+You can add your own to the build file if you do not have a <code>meta</code> file to parse:
+</p>
+
+<pre class="code prettyprint">{
+    &quot;name&quot;: &quot;foobar&quot;,
+    &quot;builds&quot;: {
+        &quot;module&quot;: {
+            &quot;jsfiles&quot;: [
+                &quot;.&#x2F;js&#x2F;foo.js&quot;
+            ],
+            &quot;config&quot;: {
+                &quot;use&quot;: [
+                    &quot;yui-base&quot;,
+                    &quot;get&quot;,
+                    &quot;features&quot;,
+                    &quot;intl-base&quot;,
+                    &quot;yui-log&quot;,
+                    &quot;yui-later&quot;,
+                    &quot;loader-base&quot;,
+                    &quot;loader-rollup&quot;,
+                    &quot;loader-yui3&quot;
+                ]
+            }
+        }
+    }
+}</pre>
+
+
+<p><strong>Note:</strong> If you provide a <code>config</code> object and you have <code>Loader</code> meta-data, <code>shifter</code> will attempt to
+merge them together, so your results may vary on this.</p>
+
+<h2 id="build.json"><code>build.json</code> reference</h2>
+
+<p>For an object reference <a href="#build.json-api">jump to the table below</a></p>
+
+<p>Simple <code>build.json</code> example</p>
+
+<pre class="code prettyprint">{
+    &quot;name&quot;: &quot;yql&quot;,
+    &quot;builds&quot;: {
+        &quot;yql&quot;: {
+            &quot;jsfiles&quot;: [
+                &quot;yql.js&quot;
+            ]
+        }
+    }
+}</pre>
+
+
+<p>A more complex <code>build.json</code> file (a truncated version of the <a href="https://github.com/yui/yui3/blob/master/src/yui/build.json">yui/build.json</a> file)</p>
+
+<pre class="code prettyprint">{
+    &quot;name&quot;: &quot;yui&quot;,
+    &quot;prebuilds&quot;: [
+        &quot;get&quot;,
+        &quot;loader&quot;
+    ],
+    &quot;postbuilds&quot;: [
+        &quot;simpleyui&quot;
+    ],
+    &quot;exec&quot;: [
+        &quot;.&#x2F;scripts&#x2F;build.js&quot;
+    ],
+    &quot;builds&quot;: {
+        &quot;yui-log&quot;: {
+            &quot;jsfiles&quot;: [
+                &quot;yui-log.js&quot;
+            ]
+        },
+        &quot;yui-core&quot;: {
+            &quot;name&quot;: &quot;yui-base&quot;,
+            &quot;replace&quot;: {
+                &quot;@YUI_CORE@&quot;: &quot;[&#x27;intl-base&#x27;]&quot;
+            },
+            &quot;prependfiles&quot;: [
+                &quot;js&#x2F;yui.js&quot;
+            ],
+            &quot;jsfiles&quot;: [
+                &quot;yui-base.js&quot;,
+                &quot;yui-object.js&quot;,
+                &quot;yui-ua.js&quot;,
+                &quot;alias.js&quot;
+            ]
+        }
+    },
+    &quot;rollups&quot;: {
+        &quot;yui-base&quot;: {
+            &quot;name&quot;: &quot;yui&quot;,
+            &quot;replace&quot;: {
+                &quot;@YUI_CORE@&quot;: &quot;[&#x27;get&#x27;, &#x27;features&#x27;, &#x27;intl-base&#x27;, &#x27;yui-log&#x27;, &#x27;yui-later&#x27;]&quot;
+            },
+            &quot;config&quot;: {
+                &quot;use&quot;: [
+                    &quot;yui-log&quot;,
+                    &quot;yui-later&quot;
+                ]   
+            },
+            &quot;files&quot;: [
+                &quot;yui-base&quot;,
+                &quot;yui-log&quot;,
+                &quot;yui-later&quot;
+            ],
+            &quot;build&quot;: {
+                &quot;prependfiles&quot;: [
+                    &quot;js&#x2F;yui.js&quot;
+                ],
+                &quot;jsfiles&quot;: [
+                    &quot;yui-base.js&quot;,
+                    &quot;yui-lang.js&quot;,
+                    &quot;alias.js&quot;
+                ]
+            }
+        }
+    }
+}</pre>
+
+
+<h2 id="build.json-api"><code>build.json</code> object reference</h2>
+
+<h3 id="build.json-root">root properties</h3>
+
+<table>
+<tr>
+    <th>key</th>
+    <th>value</th>
+</tr>
+<tr>
+    <td><code>name</code></td>
+    <td><code>String</code> the name of this module</td>
+</tr>
+<tr>
+    <td><code>prebuilds*</code></td>
+    <td><code>Array</code> of modules that you want to build before this build (<code>CWD ..&#x2F; module</code>) "prebuilds" [ "foo", "bar" ]`</td>
+</tr>
+<tr>
+    <td><code>postbuilds*</code></td>
+    <td><code>Array</code> same as <code>prebuilds</code> only executes after the build is complete.</td>
+</tr>
+<tr>
+    <td><code>exec*</code></td>
+    <td><code>Array</code> of scripts to execute before the build</td>
+</tr>
+<tr>
+    <td><code>builds</code></td>
+    <td><code>Object</code> describes the module builds to perform</td>
+</tr>
+<tr>
+    <td><code>rollups</code></td>
+    <td><code>Object</code> describes the module rollups to perform after the build</td>
+</tr>
+</table>
+
+<p><code>*</code> denotes that these properties can also be added to an individual <code>build</code> as well as globally.</p>
+
+<h3 id="build.json-builds"><code>builds</code> properties</h3>
+
+<p>Properties available on the <code>builds</code> property.</p>
+
+<table>
+<tr>
+    <th>key</th>
+    <th>value</th>
+</tr>
+<tr>
+    <td><code>jsfiles</code></td>
+    <td><code>Array</code> of files under the <code>css</code> directory to concat (in this order)</td>
+</tr>
+<tr>
+    <td><code>cssfiles</code></td>
+    <td><code>Array</code> of files under the <code>css</code> directory to concat (in this order)</td>
+</tr>
+<tr>
+    <td><code>skinnable</code></td>
+    <td><code>Boolean</code> should a skin be built</td>
+</tr>
+<tr>
+    <td><code>regex</code></td>
+    <td><code>String</code> A regex to apply to the build to remove <code>Y.log</code> statements, the default is:<br>
+    <code>&#x2F;^.*?(?:logger|Y.log).*?(?:;|\).*;|(?:\r?\n.*?)*?\).*;).*;?.*?\r?\n&#x2F;mg</code><br>
+    <em>an empty string here bypasses this</em></td>
+</tr>
+<tr>
+    <td><code>prependfiles</code></td>
+    <td><code>Array</code> list of files to include before the concatted <code>jsfiles|cssfiles</code></td>
+</tr>
+<tr>
+    <td><code>appendfiles</code></td>
+    <td><code>Array</code> same as <code>prependfiles</code> only after the concatted files</td>
+</tr>
+<tr>
+    <td><code>replace</code></td>
+    <td><code>Object</code> search the build for <code>Object.key</code> and replace with <code>Object.value</code></td>
+</tr>
+<tr>
+    <td><code>config</code></td>
+    <td><code>Object</code> see <a href="#meta">meta-data</a></td>
+</tr>
+</table>
+
+
+<h3 id="build.json-rollups"><code>rollups</code> properties</h3>
+
+<p>Properties available on the <code>rollups</code> property.</p>
+
+<p><strong>Note:</strong> The logic behind rollups changed in <code>shifter</code>, in the previous builder
+a rollup performed a full build on the files before rolling them up. This wasted valuable time
+and needed to be changed.</p>
+
+<p>
+With <code>shifter</code> a default rollup is nothing more than stitching a few <strong>pre-built</strong>
+modules together before stamping them with a module stamp.
+</p>
+
+
+<table>
+<tr>
+    <th>key</th>
+    <th>value</th>
+</tr>
+<tr>
+    <td><code>replace</code></td>
+    <td>Same as on <code>builds</code></td>
+</tr>
+<tr>
+    <td><code>config</code></td>
+    <td>Same as on <code>builds</code></td>
+</tr>
+<tr>
+    <td><code>files</code></td>
+    <td><code>Array</code> of modules to rollup: <code>&quot;files&quot;: [ &quot;foo&quot;, &quot;bar&quot; ]</code> will look for <code>build&#x2F;foo&#x2F;foo-debug.js</code> and <code>build&#x2F;bar&#x2F;bar-debug.js</code> and roll them up</td>
+</tr>
+<tr>
+    <td><code>build</code></td>
+    <td><code>Object</code> perform this build first, then proceed with the rollup (same as a property under <code>builds</code>)</td>
+</tr>
+</table>
+
+
+
+
+
+
+</div>
+            </div>
+        </div>
+
+        <div class="yui3-u-1-4">
+            <div class="sidebar">
+                <ul class="links">
+                    <li><a href="https://github.com/davglass/shifter/" class="button">Get the Source</a></li>
+                    <li><a href="https://github.com/davglass/shifter/issues/" class="button">File an Issue</a></li>
+                    <li><a href="https://groups.google.com/forum/#!forum/yui-shifter" class="button">Questions? Join the Mailing List</a></li>
+
+                </ul>
+                
+                    <div id="toc" class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Table of Contents</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="toc">
+<li>
+<a href="#welcome-to-shifter-006">welcome to shifter 0.0.6!</a>
+</li>
+<li>
+<a href="#what">what is shifter?</a>
+</li>
+<li>
+<a href="##install">installation and usage</a>
+</li>
+<li>
+<a href="#help">command line arguments</a>
+</li>
+<li>
+<a href="#info">what does it do?</a>
+</li>
+<li>
+<a href="#migrating">migrating to shifter</a>
+</li>
+<li>
+<a href="#watch">watching and building</a>
+</li>
+<li>
+<a href="#meta">meta-data</a>
+</li>
+<li>
+<a href="#build.json"><code>build.json</code> reference</a>
+</li>
+<li>
+<a href="#build.json-api"><code>build.json</code> object reference</a>
+<ul class="toc">
+<li>
+<a href="#build.json-root">root properties</a>
+</li>
+<li>
+<a href="#build.json-builds"><code>builds</code> properties</a>
+</li>
+<li>
+<a href="#build.json-rollups"><code>rollups</code> properties</a>
+</li>
+</ul>
+</li>
+</ul>
+                        </div>
+                    </div>
+                
+
+                
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
