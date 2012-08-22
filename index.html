@@ -23,7 +23,7 @@
     <div class="yui3-g">
         <div class="yui3-u-3-4">
             <div id="main">
-                <div class="content"><h2 id="welcome-to-shifter-007">welcome to shifter 0.0.7!</h2>
+                <div class="content"><h2 id="welcome-to-shifter-008">welcome to shifter 0.0.8!</h2>
 
 <div class="intro">
 shifter - blazingly fast yui builder
@@ -55,9 +55,10 @@ pass no arguments and shifter will build the module from the current directory
 
    -v&#x2F;--version            show version
    -h&#x2F;--help               show this stuff
-   -m&#x2F;--modules &lt;module&gt;   limit the modules to build (array: -m foo -m bar)
+   -m&#x2F;--modules [module]   limit the modules to build (array: -m foo -m bar)
    --lint [preferred|defaults|strict] (preferred is the default) lint mode: https:&#x2F;&#x2F;github.com&#x2F;yui&#x2F;yui-lint
    --strict                add &quot;use strict&quot; to module wrapper
+   -c&#x2F;--config [file]      specify a config file name
    --walk                  Walk the current directory and shift all builds. (cd yui3&#x2F;src &amp;&amp; shifter --walk)
                                -m&#x2F;--modules also supported here for filtering
    --watch                 Watch the current module and rebuild on file change (if meta file, a loader build will launch)
@@ -249,6 +250,10 @@ merge them together, so your results may vary on this.</p>
     <td><code>Array</code> of scripts to execute before the build</td>
 </tr>
 <tr>
+    <td><code>postexec*</code></td>
+    <td><code>Array</code> of scripts to execute after the build</td>
+</tr>
+<tr>
     <td><code>builds</code></td>
     <td><code>Object</code> describes the module builds to perform</td>
 </tr>
@@ -302,6 +307,16 @@ merge them together, so your results may vary on this.</p>
 <tr>
     <td><code>config</code></td>
     <td><code>Object</code> see <a href="#meta">meta-data</a></td>
+</tr>
+<tr>
+    <td><code>copy</code></td>
+    <td><code>Array</code> of <code>Array</code>'s containig <code>from</code> and <code>to</code>:<br>
+<pre class="code prettyprint">&quot;copy&quot;: [
+    [ &quot;.&#x2F;foo&quot;, &quot;.&#x2F;bar&quot; ],
+    [ &quot;.&#x2F;foobar&quot;, &quot;.&#x2F;barfoo&quot; ]
+]</pre>
+
+    </td>
 </tr>
 </table>
 
@@ -369,7 +384,7 @@ modules together before stamping them with a module stamp.
                         <div class="bd">
                             <ul class="toc">
 <li>
-<a href="#welcome-to-shifter-007">welcome to shifter 0.0.7!</a>
+<a href="#welcome-to-shifter-008">welcome to shifter 0.0.8!</a>
 </li>
 <li>
 <a href="#what">what is shifter?</a>
