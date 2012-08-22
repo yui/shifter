@@ -231,6 +231,10 @@ merge them together, so your results may vary on this.</p>
     <td>`Array` of scripts to execute before the build</td>
 </tr>
 <tr>
+    <td>`postexec*`</td>
+    <td>`Array` of scripts to execute after the build</td>
+</tr>
+<tr>
     <td>`builds`</td>
     <td>`Object` describes the module builds to perform</td>
 </tr>
@@ -284,6 +288,17 @@ merge them together, so your results may vary on this.</p>
 <tr>
     <td>`config`</td>
     <td>`Object` see <a href="#meta">meta-data</a></td>
+</tr>
+<tr>
+    <td>`copy`</td>
+    <td>`Array` of `Array`'s containig `from` and `to`:<br>
+    ```
+    "copy": [
+        [ "./foo", "./bar" ],
+        [ "./foobar", "./barfoo" ]
+    ]
+    ```
+    </td>
 </tr>
 </table>
 
