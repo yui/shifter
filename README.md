@@ -26,6 +26,8 @@ Options
        --strict                add "use strict" to module wrapper
        --walk                  Walk the current directory and shift all builds. (cd yui3/src && shifter --walk)
                                    -m/--modules also supported here for filtering
+       --watch                 Watch the current module and rebuild on file change (if meta file, a loader build will launch)
+                                   --quiet to mute stdout from sub build
 
 Usage
 -----
