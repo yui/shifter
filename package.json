@@ -1,7 +1,7 @@
 {
     "name": "shifter",
     "description": "New YUI build tool based on Gearjs, so let's shift some gears",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "dependencies": {
         "colors": "*",
         "gear": ">= 0.7.0",
@@ -16,6 +16,9 @@
     "devDependencies": {
         "selleck": "*"
     },
+    "keywords": [
+        "builder", "gearjs", "yui", "yuilibrary", "cli"
+    ],
     "bin": {
         "shifter": "./bin/shifter"
     }
