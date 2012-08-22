@@ -12,7 +12,7 @@ clean:
 
 docs: clean doc 
 
-deploydocs: version
+deploydocs: docs
 	rm -rRf ../shifter-pages/*
 	cp -R ./output/* ../shifter-pages/
 
