@@ -40,6 +40,14 @@ it can process. It only imports the relevant settings required to build the modu
 Instead, Shifter parses the meta-data from the modules `meta/*.json` files and uses that instead.
 So you don't have to declare your meta-data in more than one place now.
 
+Watching
+--------
+
+Shifter can watch your module for changes and build for you. It will only watch files in the
+`./js`, `./css`, `./assets` and `./meta` directories. If a file is changed, it will rebuild the current
+module. If a meta file is changes, `Loader` will also be built (*requires latest code*).
+
+
 Migrating
 ---------
 
