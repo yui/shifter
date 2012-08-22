@@ -32,9 +32,10 @@ shifter - blazingly fast yui builder
 
        -v/--version            show version
        -h/--help               show this stuff
-       -m/--modules <module>   limit the modules to build (array: -m foo -m bar)
+       -m/--modules [module]   limit the modules to build (array: -m foo -m bar)
        --lint [preferred|defaults|strict] (preferred is the default) lint mode: https://github.com/yui/yui-lint
        --strict                add "use strict" to module wrapper
+       -c/--config [file]      specify a config file name
        --walk                  Walk the current directory and shift all builds. (cd yui3/src && shifter --walk)
                                    -m/--modules also supported here for filtering
        --watch                 Watch the current module and rebuild on file change (if meta file, a loader build will launch)
