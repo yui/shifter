@@ -11,7 +11,9 @@
         "yuicompressor": "2.4.7",
         "yui-lint": "*",
         "jslint": "*",
-        "watch": "*"
+        "watch": "*",
+        "ncp": "*",
+        "rimraf": "*"
     },
     "devDependencies": {
         "selleck": "*"
