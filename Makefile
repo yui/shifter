@@ -10,10 +10,13 @@ doc: version
 clean:
 	rm -rRf ./output/*
 
+lint:
+	npm run-script pretest
+
 docs: clean doc 
 
 deploydocs: docs
 	rm -rRf ../shifter-pages/*
 	cp -R ./output/* ../shifter-pages/
 
-.PHONY: docs clean deploydocs
+.PHONY: docs clean deploydocs lint

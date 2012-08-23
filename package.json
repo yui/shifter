@@ -23,5 +23,9 @@
     ],
     "bin": {
         "shifter": "./bin/shifter"
+    },
+    "scripts": {
+        "pretest": "jslint --node --sloppy ./lib/*.js ./lib/*/*.js",
+        "test": "vows ./tests/*.js"
     }
 }
