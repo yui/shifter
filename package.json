@@ -16,7 +16,8 @@
         "rimraf": "*"
     },
     "devDependencies": {
-        "selleck": "*"
+        "selleck": "*",
+        "yuitest": "*" 
     },
     "keywords": [
         "builder", "gearjs", "yui", "yuilibrary", "cli"
@@ -26,6 +27,6 @@
     },
     "scripts": {
         "pretest": "jslint --node --sloppy ./lib/*.js ./lib/*/*.js",
-        "test": "vows ./tests/*.js"
+        "test": "yuitest ./tests/*.js"
     }
 }
