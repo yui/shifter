@@ -1,5 +1,3 @@
-YUI.add('yql', function (Y, NAME) {
-
     /**
      * This class adds a sugar class to allow access to YQL (http://developer.yahoo.com/yql/).
      * @module yql
@@ -111,6 +109,7 @@ YUI.add('yql', function (Y, NAME) {
             if (o.allowCache !== false) {
                 o.allowCache = true;
             }
+            Y.log('URL: ' + url, 'info', 'yql');
             
             if (!this._jsonp) {
                 this._jsonp = Y.jsonp(url, o);
@@ -165,6 +164,3 @@ YUI.add('yql', function (Y, NAME) {
         return new Y.YQLRequest(sql, callback, params, opts).send();
     };
 
-
-
-}, '@VERSION@', {"requires": ["jsonp", "jsonp-url"]});
