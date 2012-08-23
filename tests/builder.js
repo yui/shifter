@@ -18,7 +18,7 @@ var tests = {
         topic: function() {
             rimraf(path.join(buildBase, 'yql'), this.callback);
         },
-        'should not have build dir': {
+        'should not have build dir and': {
             topic: function() {
                 var self = this;
                 fs.stat(path.join(buildBase, 'yql'), function(err) {
@@ -29,7 +29,7 @@ var tests = {
                 assert.isNotNull(err);
                 assert.equal(err.code, 'ENOENT');
             },
-            'and should build YQL': {
+            'should build YQL and': {
                 topic: function() {
                     var child = spawn(shifter, [], {
                         cwd: srcBase
@@ -37,16 +37,16 @@ var tests = {
 
                     child.on('exit', this.callback);
                 },
-                'and should create build dir': {
+                'should create build dir and': {
                     topic: function() {
                         fs.stat(path.join(buildBase, 'yql'), this.callback);
                     },
-                    'and should create build/yql': function(err, stat) {
+                    'should create build/yql': function(err, stat) {
                         assert.isNull(err);
                         assert.isTrue(stat.isDirectory());
                     }
                 },
-                'and should produce same files': {
+                'should produce same files and': {
                     topic: function() {
                         var stack = new Stack();
                         var results = {
@@ -71,7 +71,7 @@ var tests = {
                         fs.readdir(path.join(buildXBase, 'yql'), stack.add(function(err, files) {
                             files.forEach(function(file) {
                                 (function(file) {
-                                    fs.readFile(path.join(buildBase, 'yql', file), stack.add(function(err, data) {
+                                    fs.readFile(path.join(buildXBase, 'yql', file), stack.add(function(err, data) {
                                         var shasum = crypto.createHash('sha1');
                                         shasum.update(data);
                                         var d = shasum.digest('hex');
@@ -86,16 +86,16 @@ var tests = {
                         });
 
                     },
-                    'and min should be same': function(err, results) {
+                    'min should be same': function(err, results) {
                         assert.equal(results.pre['yql-min.js'], results.post['yql-min.js']);
                     },
-                    'and raw should be same': function(err, results) {
+                    'raw should be same': function(err, results) {
                         assert.equal(results.pre['yql.js'], results.post['yql.js']);
                     },
-                    'and debug should be same': function(err, results) {
+                    'debug should be same': function(err, results) {
                         assert.equal(results.pre['yql-debug.js'], results.post['yql-debug.js']);
                     },
-                    'and coverage should be same': function(err, results) {
+                    'coverage should be same': function(err, results) {
                         assert.equal(results.pre['yql-coverage.js'], results.post['yql-coverage.js']);
                     }
                 }
