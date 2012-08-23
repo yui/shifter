@@ -17,6 +17,7 @@
     },
     "devDependencies": {
         "selleck": "*",
+        "rimraf": "*",
         "vows": "*" 
     },
     "keywords": [
@@ -27,6 +28,6 @@
     },
     "scripts": {
         "pretest": "jslint --node --sloppy ./lib/*.js ./lib/*/*.js",
-        "test": "vows ./tests/*.js"
+        "test": "vows --spec ./tests/*.js"
     }
 }
