@@ -10,6 +10,11 @@ Documentation
 
 [Documentation can be found here](http://davglass.github.com/shifter/)
 
+Build Status
+------------
+
+[![Build Status](https://secure.travis-ci.org/davglass/shofter.png?branch=master)](http://travis-ci.org/davglass/shifter)
+
 Install
 -------
 
