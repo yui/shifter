@@ -17,7 +17,7 @@
     },
     "devDependencies": {
         "selleck": "*",
-        "yuitest": "*" 
+        "vows": "*" 
     },
     "keywords": [
         "builder", "gearjs", "yui", "yuilibrary", "cli"
@@ -27,6 +27,6 @@
     },
     "scripts": {
         "pretest": "jslint --node --sloppy ./lib/*.js ./lib/*/*.js",
-        "test": "yuitest ./tests/*.js"
+        "test": "vows ./tests/*.js"
     }
 }
