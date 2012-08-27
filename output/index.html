@@ -23,7 +23,7 @@
     <div class="yui3-g">
         <div class="yui3-u-3-4">
             <div id="main">
-                <div class="content"><h2 id="welcome-to-shifter-0010">welcome to shifter 0.0.10!</h2>
+                <div class="content"><h2 id="welcome-to-shifter-0011">welcome to shifter 0.0.11!</h2>
 
 <div class="intro">
 <center>
@@ -64,8 +64,14 @@ pass no arguments and shifter will build the module from the current directory
    --walk                  Walk the current directory and shift all builds. (cd yui3&#x2F;src &amp;&amp; shifter --walk)
                                -m&#x2F;--modules also supported here for filtering
    --watch                 Watch the current module and rebuild on file change (if meta file, a loader build will launch)
-                               --quiet to mute stdout from sub build</pre>
+                               --quiet to mute stdout from sub build
+Experimental Options:
+  --cache&#x2F;--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
+  --cache-file &lt;path&gt;     File to store build cache, defaults to $CWD&#x2F;.shifter_meta
+  --fail                  Fail the build if lint fails</pre>
 
+
+<p><a href="#exp">More information about experimental options.</a></p>
 
 <h2 id="info">what does it do?</h2>
 
@@ -361,10 +367,28 @@ modules together before stamping them with a module stamp.
 </table>
 
 
+<h2 id="exp">experimental options</h2>
 
+<p>
+From time to time I will add experimental options to shifter to allow for developers to test new features prior to turning them on.
+</p>
 
+<h3 id="exp.cache">build file caching</h3>
 
+<p>
+You can turn on build time caching with the <code>--cache</code> config option. This will write a cache file out with the MD5's of the build. If
+the MD5 matches one in the meta file, the build will abort and skip the remaining tasks (<code>compressor, coverage, etc</code>) to speed up development.
+</p>
 
+<p>
+You can also use <code>--cache-file [path]</code> to specify a cache file instead of using a per module one. Defaults to <code>$CWD&#x2F;.shifter_meta</code>.
+</p>
+
+<h3 id="exp.fail">failing build from lint issues</h3>
+
+<p>
+Pass <code>--fail</code> to fail the build if any lint errors occur.
+</p>
 </div>
             </div>
         </div>
@@ -395,7 +419,7 @@ modules together before stamping them with a module stamp.
                         <div class="bd">
                             <ul class="toc">
 <li>
-<a href="#welcome-to-shifter-0010">welcome to shifter 0.0.10!</a>
+<a href="#welcome-to-shifter-0011">welcome to shifter 0.0.11!</a>
 </li>
 <li>
 <a href="#what">what is shifter?</a>
@@ -432,6 +456,17 @@ modules together before stamping them with a module stamp.
 </li>
 <li>
 <a href="#build.json-rollups"><code>rollups</code> properties</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#exp">experimental options</a>
+<ul class="toc">
+<li>
+<a href="#exp.cache">build file caching</a>
+</li>
+<li>
+<a href="#exp.fail">failing build from lint issues</a>
 </li>
 </ul>
 </li>
