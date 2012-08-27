@@ -45,7 +45,10 @@
 Experimental Options:
       --cache/--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
       --cache-file <path>     File to store build cache, defaults to $CWD/.shifter_meta
+      --fail                  Fail the build if lint fails
 ```
+
+<p><a href="#exp">More information about experimental options.</a></p>
 
 <h2 id="info">what does it do?</h2>
 
@@ -363,3 +366,8 @@ the MD5 matches one in the meta file, the build will abort and skip the remainin
 You can also use `--cache-file [path]` to specify a cache file instead of using a per module one. Defaults to `$CWD/.shifter_meta`.
 </p>
 
+<h3 id="exp.fail">failing build from lint issues</h3>
+
+<p>
+Pass `--fail` to fail the build if any lint errors occur.
+</p>
