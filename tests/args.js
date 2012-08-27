@@ -1,5 +1,6 @@
 var vows = require('vows'),
     assert = require('assert'),
+    path = require('path'),
     args = require('../lib/args');
 
 var argsTests = {
@@ -8,6 +9,7 @@ var argsTests = {
     '--version': 'version',
     '-v': 'version',
     '--strict': 'strict',
+    '--cache': 'cache',
     '--walk': 'walk',
     '--watch': 'watch',
     '--quiet': 'quiet',
@@ -36,6 +38,30 @@ var tests = {
         },
         'should not parse no file': function(topic) {
             assert.equal(topic.config, process.cwd());
+        }
+    },
+    'should parse --cache-file <file>': {
+        topic: function() {
+            return args.parse(['', '', '--cache-file', '../.shifter_meta']);
+        },
+        'should parse new file': function(topic) {
+            assert.equal(topic['cache-file'], path.join(process.cwd(), '../.shifter_meta'));
+        }
+    },
+    'should had cache as false by default': {
+        topic: function() {
+            return args.parse(['', '']);
+        },
+        'cache should be false': function(topic) {
+            assert.equal(topic.cache, false);
+        }
+    },
+    'should parse --no-cache': {
+        topic: function() {
+            return args.parse(['', '', '--no-cache']);
+        },
+        'cache should be false': function(topic) {
+            assert.equal(topic.cache, false);
         }
     },
     'should parse --lint defaults': {

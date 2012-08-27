@@ -31,7 +31,9 @@ var tests = {
             },
             'should build YQL and': {
                 topic: function() {
-                    var child = spawn(shifter, [], {
+                    var child = spawn(shifter, [
+                        '--no-cache'
+                    ], {
                         cwd: srcBase
                     });
 
