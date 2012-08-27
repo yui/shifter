@@ -42,6 +42,9 @@
                                    -m/--modules also supported here for filtering
        --watch                 Watch the current module and rebuild on file change (if meta file, a loader build will launch)
                                    --quiet to mute stdout from sub build
+Experimental Options:
+      --cache/--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
+      --cache-file <path>     File to store build cache, defaults to $CWD/.shifter_meta
 ```
 
 <h2 id="info">what does it do?</h2>
@@ -343,7 +346,20 @@ modules together before stamping them with a module stamp.
 </table>
 
 
+<h2 id="exp">experimental options</h3>
 
+<p>
+From time to time I will add experimental options to shifter to allow for developers to test new features prior to turning them on.
+</p>
 
+<h3 id="exp.cache">build file caching</h3>
 
+<p>
+You can turn on build time caching with the `--cache` config option. This will write a cache file out with the MD5's of the build. If
+the MD5 matches one in the meta file, the build will abort and skip the remaining tasks (`compressor, coverage, etc`) to speed up development.
+</p>
+
+<p>
+You can also use `--cache-file [path]` to specify a cache file instead of using a per module one. Defaults to `$CWD/.shifter_meta`.
+</p>
 
