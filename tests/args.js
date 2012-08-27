@@ -14,6 +14,7 @@ var argsTests = {
     '--watch': 'watch',
     '--quiet': 'quiet',
     '--ant': 'ant',
+    '--fail': 'fail',
     '-w': 'walk'
 };
 
@@ -62,6 +63,30 @@ var tests = {
         },
         'cache should be false': function(topic) {
             assert.equal(topic.cache, false);
+        }
+    },
+    'should not parse --no-fail': {
+        topic: function() {
+            return args.parse(['', '', '--no-fail']);
+        },
+        'should parse': function(topic) {
+            assert.equal(topic.fail, false);
+        }
+    },
+    'fail should be undefined by default': {
+        topic: function() {
+            return args.parse(['', '']);
+        },
+        'should parse': function(topic) {
+            assert.equal(topic.fail, undefined);
+        }
+    },
+    'should parse --fail': {
+        topic: function() {
+            return args.parse(['', '', '--fail']);
+        },
+        'should parse': function(topic) {
+            assert.equal(topic.fail, true);
         }
     },
     'should parse --lint defaults': {
