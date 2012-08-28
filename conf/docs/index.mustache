@@ -42,6 +42,9 @@
                                    -m/--modules also supported here for filtering
        --watch                 Watch the current module and rebuild on file change (if meta file, a loader build will launch)
                                    --quiet to mute stdout from sub build
+                                   all other build options accepted here: (--strict, --lint, etc)
+       --jsstamp/--no-jsstamp  Should it stamp the JS with the YUI.add wrapper, defaults to --stamp
+
 Experimental Options:
       --cache/--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
       --cache-file <path>     File to store build cache, defaults to $CWD/.shifter_meta

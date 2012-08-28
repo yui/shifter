@@ -15,6 +15,7 @@ var argsTests = {
     '--quiet': 'quiet',
     '--ant': 'ant',
     '--fail': 'fail',
+    '--jsstamp': 'jsstamp',
     '-w': 'walk'
 };
 
@@ -150,6 +151,22 @@ var tests = {
             assert.equal(topic.modules.length, 2);
             assert.equal(topic.modules[0], 'foo');
             assert.equal(topic.modules[1], 'bar');
+        }
+    },
+    'should default to jsstamp true': {
+        topic: function() {
+            return args.parse(['', '', '']);
+        },
+        'parsed as true': function(topic) {
+            assert.isTrue(topic.jsstamp);
+        }
+    },
+    'should parse --no-jsstamp': {
+        topic: function() {
+            return args.parse(['', '', '--no-jsstamp']);
+        },
+        'parsed as false': function(topic) {
+            assert.isFalse(topic.jsstamp);
         }
     }
 };
