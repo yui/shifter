@@ -11,6 +11,8 @@
         "yuicompressor": "2.4.7",
         "yui-lint": "*",
         "jslint": "*",
+        "uglify-js": "~1.3.3",
+        "cssmin": "~0.3.0",
         "watch": "*",
         "ncp": "*",
         "mkdirp": "*",
@@ -18,7 +20,6 @@
     },
     "devDependencies": {
         "selleck": "*",
-        "rimraf": "*",
         "vows": "*" 
     },
     "keywords": [
