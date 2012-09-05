@@ -85,6 +85,17 @@ file and have Shifter regenerate it after your issue is fixed.</p>
 `./js`, `./css`, `./assets` and `./meta` directories. If a file is changed, it will rebuild the current
 module. If a meta file is changes, `Loader` will also be built (<strong>requires latest YUI source code</strong>).</p>
 
+<h2 id="skins">skin handling</h2>
+
+<p>`shifter` will attempt to process skins the way the old builder used to do them, but with the same
+side-effect/bug of creating skins for all submodules even if they don't have a skin.</p>
+
+<p>`shifter` now supports a valid way to handle this, if you "namespace" your assets under a "module"
+directory below `assets`, shifter will do the right thing.
+</p>
+
+<p>Here is an example directory structure, it's easier to <a href="https://gist.github.com/bc923c17d33f2e0d006e">read than to explain</a>.</p>
+
 <h2 id="meta">meta-data</h2>
 
 <p>One of the goals of `shifter` was to remove the need for duplicating `Loader` meta-data. This includes:</p>
