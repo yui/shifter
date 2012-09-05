@@ -230,6 +230,19 @@ merge them together, so your results may vary on this.</p>
     <td>`String` the name of this module</td>
 </tr>
 <tr>
+    <td>`shifter`</td>
+    <td>`Object` containing default shifter options: CLI options will override these.
+    <br>
+    ```
+    "shifter": {
+        "jsstamp": false,
+        "coverage": false,
+        "lint": "defaults"
+    }
+    ```
+    </td>
+</tr>
+<tr>
     <td>`prebuilds*`</td>
     <td>`Array` of modules that you want to build before this build (`CWD ../ module`) "prebuilds" [ "foo", "bar" ]`</td>
 </tr>
