@@ -16,7 +16,8 @@
         "watch": "*",
         "ncp": "*",
         "mkdirp": "*",
-        "rimraf": "*"
+        "rimraf": "*",
+        "which": "*"
     },
     "devDependencies": {
         "selleck": "*",
