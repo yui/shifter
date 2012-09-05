@@ -20,12 +20,14 @@ Install
 
     npm -g install shifter
 
-Options
--------
+Some Options
+------------
+
+More detail can be found in the [documentation](http://davglass.github.com/shifter/)
 
     $ shifter -h
 
-    blazingly fast builds with shifter@0.0.4
+    blazingly fast builds with shifter
 
     pass no arguments and shifter will build the module from the current directory
 
