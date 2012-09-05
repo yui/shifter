@@ -16,6 +16,10 @@ var argsTests = {
     '--ant': 'ant',
     '--fail': 'fail',
     '--jsstamp': 'jsstamp',
+    '--compressor': 'compressor',
+    '--list': 'list',
+    '--exec': 'exec',
+    '--coverage': 'coverage',
     '-w': 'walk'
 };
 
@@ -167,6 +171,38 @@ var tests = {
         },
         'parsed as false': function(topic) {
             assert.isFalse(topic.jsstamp);
+        }
+    },
+    'should parse --no-exec': {
+        topic: function() {
+            return args.parse(['', '', '--no-exec']);
+        },
+        'parsed as false': function(topic) {
+            assert.isFalse(topic.exec);
+        }
+    },
+    'should parse --no-coverage': {
+        topic: function() {
+            return args.parse(['', '', '--no-coverage']);
+        },
+        'parsed as false': function(topic) {
+            assert.isFalse(topic.coverage);
+        }
+    },
+    'should have coverage by default': {
+        topic: function() {
+            return args.parse(['', '']);
+        },
+        'parsed as true': function(topic) {
+            assert.isTrue(topic.coverage);
+        }
+    },
+    'should have exec by default': {
+        topic: function() {
+            return args.parse(['', '']);
+        },
+        'parsed as true': function(topic) {
+            assert.isTrue(topic.exec);
         }
     }
 };

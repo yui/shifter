@@ -8,7 +8,7 @@ var vows = require('vows'),
     base = path.join(__dirname, 'assets/yql/'),
     crypto = require('crypto'),
     buildBase = path.join(base, 'build'),
-    buildXBase = path.join(base, 'build-expected'),
+    buildXBase = path.join(base, 'build-uglify'),
     srcBase = path.join(base, 'src/yql'),
     rimraf = require('rimraf');
 
@@ -32,8 +32,7 @@ var tests = {
             'should build YQL and': {
                 topic: function() {
                     var child = spawn(shifter, [
-                        '--no-cache',
-                        '--compressor'
+                        '--no-cache'
                     ], {
                         cwd: srcBase
                     });
@@ -89,7 +88,7 @@ var tests = {
                         });
 
                     },
-                    'min should be same with YUI Compressor': function(err, results) {
+                    'min should be same with UglifyJS': function(err, results) {
                         assert.equal(results.pre['yql-min.js'], results.post['yql-min.js']);
                     },
                     'raw should be same': function(err, results) {
