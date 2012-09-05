@@ -28,7 +28,7 @@
 
     $ shifter -h
 
-    blazingly fast builds with shifter@0.0.4
+    blazingly fast builds with shifter@{{version}}
 
     pass no arguments and shifter will build the module from the current directory
 
@@ -38,17 +38,22 @@
        --lint [preferred|defaults|strict] (preferred is the default) lint mode: https://github.com/yui/yui-lint
        --strict                add "use strict" to module wrapper
        -c/--config [file]      specify a config file name
+       --ant                   parse the ant files and create a build.json but do not build
+       --list                  List the builds and rollups from the build.json file
+       --no-exec               Do not run pre/postbuild or pre/post execs
        --walk                  Walk the current directory and shift all builds. (cd yui3/src && shifter --walk)
                                    -m/--modules also supported here for filtering
        --watch                 Watch the current module and rebuild on file change (if meta file, a loader build will launch)
                                    --quiet to mute stdout from sub build
                                    all other build options accepted here: (--strict, --lint, etc)
        --jsstamp/--no-jsstamp  Should it stamp the JS with the YUI.add wrapper, defaults to --stamp
-
-Experimental Options:
-      --cache/--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
-      --cache-file <path>     File to store build cache, defaults to $CWD/.shifter_meta
-      --fail                  Fail the build if lint fails
+    Experimental Options:
+       --semi                  Toggle on the strict semicolon checking in Uglify
+       --cache/--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
+       --cache-file <path>     File to store build cache, defaults to $CWD/.shifter_meta
+       --fail                  Fail the build if lint fails
+       --compressor            Use YUI Compressor instead of uglify
+       --no-lint               Skip JSlint, you better know what you are doing!
 ```
 
 <p><a href="#exp">More information about experimental options.</a></p>
@@ -386,4 +391,30 @@ You can also use `--cache-file [path]` to specify a cache file instead of using 
 
 <p>
 Pass `--fail` to fail the build if any lint errors occur.
+</p>
+
+
+<h3 id="exp.semi">strict semicolon checking in Uglify</h3>
+
+<p>The default is to not require strict semi colons with UglifyJS, for example:</p>
+
+```
+var foo = {};
+
+foo.bar = function () {
+}
+```
+
+<p>That last `}` should be `};`, in strict mode Uglify will throw without that semi colon.</p>
+
+
+<h3 id="exp.lint">skipping jslint</h3>
+
+<p>Some developers do not agree with JSLint, so this option is there for them to use whatever lint program they choose to use. As long as they use one!</p>
+
+
+<h3 id="exp.compressor">using YUI Compressor</h3>
+
+<p>As of version `0.1.0` Shifter defaults to using <a href="https://github.com/mishoo/UglifyJS/">UglifyJS</a> as it's default compression utility.
+If there is an issue with compressing your module with Uglify, you can revert to using YUI Compressor with the `--compressor` flag.
 </p>
