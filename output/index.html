@@ -23,7 +23,7 @@
     <div class="yui3-g">
         <div class="yui3-u-3-4">
             <div id="main">
-                <div class="content"><h2 id="welcome-to-shifter-0018">welcome to shifter 0.0.18!</h2>
+                <div class="content"><h2 id="welcome-to-shifter-0019">welcome to shifter 0.0.19!</h2>
 
 <div class="intro">
 <center>
@@ -51,7 +51,7 @@
 
 <pre class="code terminal"><span class="noselect">$ </span>shifter -h
 
-blazingly fast builds with shifter@0.0.4
+blazingly fast builds with shifter@0.0.19
 
 pass no arguments and shifter will build the module from the current directory
 
@@ -61,17 +61,22 @@ pass no arguments and shifter will build the module from the current directory
    --lint [preferred|defaults|strict] (preferred is the default) lint mode: https:&#x2F;&#x2F;github.com&#x2F;yui&#x2F;yui-lint
    --strict                add &quot;use strict&quot; to module wrapper
    -c&#x2F;--config [file]      specify a config file name
+   --ant                   parse the ant files and create a build.json but do not build
+   --list                  List the builds and rollups from the build.json file
+   --no-exec               Do not run pre&#x2F;postbuild or pre&#x2F;post execs
    --walk                  Walk the current directory and shift all builds. (cd yui3&#x2F;src &amp;&amp; shifter --walk)
                                -m&#x2F;--modules also supported here for filtering
    --watch                 Watch the current module and rebuild on file change (if meta file, a loader build will launch)
                                --quiet to mute stdout from sub build
                                all other build options accepted here: (--strict, --lint, etc)
    --jsstamp&#x2F;--no-jsstamp  Should it stamp the JS with the YUI.add wrapper, defaults to --stamp
-
 Experimental Options:
-  --cache&#x2F;--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
-  --cache-file &lt;path&gt;     File to store build cache, defaults to $CWD&#x2F;.shifter_meta
-  --fail                  Fail the build if lint fails</pre>
+   --semi                  Toggle on the strict semicolon checking in Uglify
+   --cache&#x2F;--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
+   --cache-file &lt;path&gt;     File to store build cache, defaults to $CWD&#x2F;.shifter_meta
+   --fail                  Fail the build if lint fails
+   --compressor            Use YUI Compressor instead of uglify
+   --no-lint               Skip JSlint, you better know what you are doing!</pre>
 
 
 <p><a href="#exp">More information about experimental options.</a></p>
@@ -102,6 +107,17 @@ file and have Shifter regenerate it after your issue is fixed.</p>
 <p><code>shifter</code> can watch your module for changes and build for you. It will only watch files in the
 <code>.&#x2F;js</code>, <code>.&#x2F;css</code>, <code>.&#x2F;assets</code> and <code>.&#x2F;meta</code> directories. If a file is changed, it will rebuild the current
 module. If a meta file is changes, <code>Loader</code> will also be built (<strong>requires latest YUI source code</strong>).</p>
+
+<h2 id="skins">skin handling</h2>
+
+<p><code>shifter</code> will attempt to process skins the way the old builder used to do them, but with the same
+side-effect/bug of creating skins for all submodules even if they don't have a skin.</p>
+
+<p><code>shifter</code> now supports a valid way to handle this, if you "namespace" your assets under a "module"
+directory below <code>assets</code>, shifter will do the right thing.
+</p>
+
+<p>Here is an example directory structure, it's easier to <a href="https://gist.github.com/bc923c17d33f2e0d006e">read than to explain</a>.</p>
 
 <h2 id="meta">meta-data</h2>
 
@@ -249,6 +265,18 @@ merge them together, so your results may vary on this.</p>
     <td><code>String</code> the name of this module</td>
 </tr>
 <tr>
+    <td><code>shifter</code></td>
+    <td><code>Object</code> containing default shifter options: CLI options will override these.
+    <br>
+<pre class="code prettyprint">&quot;shifter&quot;: {
+    &quot;jsstamp&quot;: false,
+    &quot;coverage&quot;: false,
+    &quot;lint&quot;: &quot;defaults&quot;
+}</pre>
+
+    </td>
+</tr>
+<tr>
     <td><code>prebuilds*</code></td>
     <td><code>Array</code> of modules that you want to build before this build (<code>CWD ..&#x2F; module</code>) "prebuilds" [ "foo", "bar" ]`</td>
 </tr>
@@ -392,6 +420,31 @@ You can also use <code>--cache-file [path]</code> to specify a cache file instea
 <p>
 Pass <code>--fail</code> to fail the build if any lint errors occur.
 </p>
+
+
+<h3 id="exp.semi">strict semicolon checking in Uglify</h3>
+
+<p>The default is to not require strict semi colons with UglifyJS, for example:</p>
+
+<pre class="code prettyprint">var foo = {};
+
+foo.bar = function () {
+}</pre>
+
+
+<p>That last <code>}</code> should be <code>};</code>, in strict mode Uglify will throw without that semi colon.</p>
+
+
+<h3 id="exp.lint">skipping jslint</h3>
+
+<p>Some developers do not agree with JSLint, so this option is there for them to use whatever lint program they choose to use. As long as they use one!</p>
+
+
+<h3 id="exp.compressor">using YUI Compressor</h3>
+
+<p>As of version <code>0.1.0</code> Shifter defaults to using <a href="https://github.com/mishoo/UglifyJS/">UglifyJS</a> as it's default compression utility.
+If there is an issue with compressing your module with Uglify, you can revert to using YUI Compressor with the <code>--compressor</code> flag.
+</p>
 </div>
             </div>
         </div>
@@ -422,7 +475,7 @@ Pass <code>--fail</code> to fail the build if any lint errors occur.
                         <div class="bd">
                             <ul class="toc">
 <li>
-<a href="#welcome-to-shifter-0018">welcome to shifter 0.0.18!</a>
+<a href="#welcome-to-shifter-0019">welcome to shifter 0.0.19!</a>
 </li>
 <li>
 <a href="#what">what is shifter?</a>
@@ -441,6 +494,9 @@ Pass <code>--fail</code> to fail the build if any lint errors occur.
 </li>
 <li>
 <a href="#watch">watching and building</a>
+</li>
+<li>
+<a href="#skins">skin handling</a>
 </li>
 <li>
 <a href="#meta">meta-data</a>
@@ -470,6 +526,15 @@ Pass <code>--fail</code> to fail the build if any lint errors occur.
 </li>
 <li>
 <a href="#exp.fail">failing build from lint issues</a>
+</li>
+<li>
+<a href="#exp.semi">strict semicolon checking in Uglify</a>
+</li>
+<li>
+<a href="#exp.lint">skipping jslint</a>
+</li>
+<li>
+<a href="#exp.compressor">using YUI Compressor</a>
 </li>
 </ul>
 </li>
