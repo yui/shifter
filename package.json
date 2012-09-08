@@ -1,7 +1,8 @@
 {
     "name": "shifter",
     "description": "New YUI build tool based on Gearjs, so let's shift some gears",
-    "version": "0.0.20",
+    "author": "Dav Glass <davglass@gmail.com>",
+    "version": "0.0.21",
     "dependencies": {
         "colors": "*",
         "gear": "~0.7.0",
@@ -32,5 +33,17 @@
     "scripts": {
         "pretest": "jslint --node --sloppy ./lib/*.js ./lib/*/*.js",
         "test": "vows --spec ./tests/*.js"
+    },
+    "preferGlobal": "true",
+    "bugs": { "url" : "http://github.com/yui/shifter/issues" },
+    "licenses":[
+        {
+            "type" : "BSD",
+            "url" : "https://github.com/yui/shifter/blob/master/LICENSE"
+        }
+    ],
+    "repository": {
+        "type":"git",
+        "url":"http://github.com/yui/shifter.git"
     }
 }
