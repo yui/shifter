@@ -8,12 +8,12 @@ We have out grown our old builder, so it was time to build a new one!
 Documentation
 -------------
 
-[Documentation can be found here](http://davglass.github.com/shifter/)
+[Documentation can be found here](http://yui.github.com/shifter/)
 
 Build Status
 ------------
 
-[![Build Status](https://secure.travis-ci.org/davglass/shifter.png?branch=master)](http://travis-ci.org/davglass/shifter)
+[![Build Status](https://secure.travis-ci.org/yui/shifter.png?branch=master)](http://travis-ci.org/yui/shifter)
 
 Install
 -------
@@ -23,7 +23,7 @@ Install
 Some Options
 ------------
 
-More detail can be found in the [documentation](http://davglass.github.com/shifter/)
+More detail can be found in the [documentation](http://yui.github.com/shifter/)
 
     $ shifter -h
 
