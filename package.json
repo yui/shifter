@@ -18,6 +18,7 @@
         "ncp": "https://github.com/davglass/ncp/tarball/master",
         "mkdirp": "*",
         "rimraf": "*",
+        "istanbul": "*",
         "which": "*"
     },
     "devDependencies": {
