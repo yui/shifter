@@ -46,14 +46,6 @@ var tests = {
             assert.equal(topic.config, process.cwd());
         }
     },
-    'should parse --cache-file <file>': {
-        topic: function() {
-            return args.parse(['', '', '--cache-file', '../.shifter_meta']);
-        },
-        'should parse new file': function(topic) {
-            assert.equal(topic['cache-file'], path.join(process.cwd(), '../.shifter_meta'));
-        }
-    },
     'should had cache as false by default': {
         topic: function() {
             return args.parse(['', '']);
