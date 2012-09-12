@@ -1,5 +1,13 @@
 YUI.add('yql', function (Y, NAME) {
 
+
+/*!
+ENSURE THIS STAYS AT MIN TIME
+Copyright 2012 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
     /**
      * This class adds a sugar class to allow access to YQL (http://developer.yahoo.com/yql/).
      * @module yql
