@@ -20,6 +20,7 @@ var argsTests = {
     '--list': 'list',
     '--exec': 'exec',
     '--coverage': 'coverage',
+    '--lint-stderr': 'lint-stderr',
     '-w': 'walk'
 };
 
@@ -195,6 +196,14 @@ var tests = {
         },
         'parsed as true': function(topic) {
             assert.isTrue(topic.exec);
+        }
+    },
+    'should have lint-stderr false by default': {
+        topic: function() {
+            return args.parse(['', '']);
+        },
+        'parsed as false': function(topic) {
+            assert.isFalse(topic['lint-stderr']);
         }
     }
 };

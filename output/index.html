@@ -23,7 +23,7 @@
     <div class="yui3-g">
         <div class="yui3-u-3-4">
             <div id="main">
-                <div class="content"><h2 id="welcome-to-shifter-0023">welcome to shifter 0.0.23!</h2>
+                <div class="content"><h2 id="welcome-to-shifter-0026">welcome to shifter 0.0.26!</h2>
 
 <div class="intro">
 <center>
@@ -51,7 +51,7 @@
 
 <pre class="code terminal"><span class="noselect">$ </span>shifter -h
 
-blazingly fast builds with shifter@0.0.23
+blazingly fast builds with shifter@0.0.26
 
 pass no arguments and shifter will build the module from the current directory
 
@@ -445,6 +445,15 @@ foo.bar = function () {
 <p>As of version <code>0.1.0</code> Shifter defaults to using <a href="https://github.com/mishoo/UglifyJS/">UglifyJS</a> as it's default compression utility.
 If there is an issue with compressing your module with Uglify, you can revert to using YUI Compressor with the <code>--compressor</code> flag.
 </p>
+
+<h3 id="exp.lint-stderr">Forcing lint to stderr</h3>
+
+<p>
+By default, lint warnings/errors are printed to <code>stdout</code>. But in the case that you want to trap that in logs or in a CI system, 
+I've added a <code>--lint-stderr</code> config option which forces all lint output to <code>stderr</code>.
+</p>
+
+
 </div>
             </div>
         </div>
@@ -475,7 +484,7 @@ If there is an issue with compressing your module with Uglify, you can revert to
                         <div class="bd">
                             <ul class="toc">
 <li>
-<a href="#welcome-to-shifter-0023">welcome to shifter 0.0.23!</a>
+<a href="#welcome-to-shifter-0026">welcome to shifter 0.0.26!</a>
 </li>
 <li>
 <a href="#what">what is shifter?</a>
@@ -535,6 +544,9 @@ If there is an issue with compressing your module with Uglify, you can revert to
 </li>
 <li>
 <a href="#exp.compressor">using YUI Compressor</a>
+</li>
+<li>
+<a href="#exp.lint-stderr">Forcing lint to stderr</a>
 </li>
 </ul>
 </li>

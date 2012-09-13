@@ -429,3 +429,12 @@ foo.bar = function () {
 <p>As of version `0.1.0` Shifter defaults to using <a href="https://github.com/mishoo/UglifyJS/">UglifyJS</a> as it's default compression utility.
 If there is an issue with compressing your module with Uglify, you can revert to using YUI Compressor with the `--compressor` flag.
 </p>
+
+<h3 id="exp.lint-stderr">Forcing lint to stderr</h3>
+
+<p>
+By default, lint warnings/errors are printed to `stdout`. But in the case that you want to trap that in logs or in a CI system, 
+I've added a `--lint-stderr` config option which forces all lint output to `stderr`.
+</p>
+
+
