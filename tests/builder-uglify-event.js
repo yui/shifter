@@ -9,27 +9,27 @@ var vows = require('vows'),
     crypto = require('crypto'),
     buildBase = path.join(base, 'build'),
     buildXBase = path.join(base, 'build-uglify'),
-    srcBase = path.join(base, 'src/yql'),
+    srcBase = path.join(base, 'src/event'),
     rimraf = require('rimraf');
 
 
 var tests = {
     'clean build': {
         topic: function() {
-            rimraf(path.join(buildBase, 'yql'), this.callback);
+            rimraf(path.join(buildBase, 'event-base-ie'), this.callback);
         },
         'should not have build dir and': {
             topic: function() {
                 var self = this;
-                fs.stat(path.join(buildBase, 'yql'), function(err) {
+                fs.stat(path.join(buildBase, 'event-base-ie'), function(err) {
                     self.callback(null, err);
                 });
             },
-            'should not have build/yql': function(foo, err) {
+            'should not have build/event-base-ie': function(foo, err) {
                 assert.isNotNull(err);
                 assert.equal(err.code, 'ENOENT');
             },
-            'should build YQL and': {
+            'should build Event Base IE and': {
                 topic: function() {
                     var child = spawn(shifter, [
                         '--no-cache'
@@ -41,9 +41,9 @@ var tests = {
                 },
                 'should create build dir and': {
                     topic: function() {
-                        fs.stat(path.join(buildBase, 'yql'), this.callback);
+                        fs.stat(path.join(buildBase, 'event-base-ie'), this.callback);
                     },
-                    'should create build/yql': function(err, stat) {
+                    'should create build/event-base-ie': function(err, stat) {
                         assert.isNull(err);
                         assert.isTrue(stat.isDirectory());
                     }
@@ -57,10 +57,10 @@ var tests = {
                         },
                         self = this;
 
-                        fs.readdir(path.join(buildBase, 'yql'), stack.add(function(err, files) {
+                        fs.readdir(path.join(buildBase, 'event-base-ie'), stack.add(function(err, files) {
                             files.forEach(function(file) {
                                 (function(file) {
-                                    fs.readFile(path.join(buildBase, 'yql', file), stack.add(function(err, data) {
+                                    fs.readFile(path.join(buildBase, 'event-base-ie', file), stack.add(function(err, data) {
                                         var shasum = crypto.createHash('sha1');
                                         shasum.update(data);
                                         var d = shasum.digest('hex');
@@ -70,10 +70,10 @@ var tests = {
                             });
                         }));
                         
-                        fs.readdir(path.join(buildXBase, 'yql'), stack.add(function(err, files) {
+                        fs.readdir(path.join(buildXBase, 'event-base-ie'), stack.add(function(err, files) {
                             files.forEach(function(file) {
                                 (function(file) {
-                                    fs.readFile(path.join(buildXBase, 'yql', file), stack.add(function(err, data) {
+                                    fs.readFile(path.join(buildXBase, 'event-base-ie', file), stack.add(function(err, data) {
                                         var shasum = crypto.createHash('sha1');
                                         shasum.update(data);
                                         var d = shasum.digest('hex');
@@ -89,16 +89,16 @@ var tests = {
 
                     },
                     'min should be same with UglifyJS': function(err, results) {
-                        assert.equal(results.pre['yql-min.js'], results.post['yql-min.js']);
+                        assert.equal(results.pre['event-base-ie-min.js'], results.post['event-base-ie-min.js']);
                     },
                     'raw should be same': function(err, results) {
-                        assert.equal(results.pre['yql.js'], results.post['yql.js']);
+                        assert.equal(results.pre['event-base-ie.js'], results.post['event-base-ie.js']);
                     },
                     'debug should be same': function(err, results) {
-                        assert.equal(results.pre['yql-debug.js'], results.post['yql-debug.js']);
+                        assert.equal(results.pre['event-base-ie-debug.js'], results.post['event-base-ie-debug.js']);
                     },
                     'coverage should be same': function(err, results) {
-                        assert.equal(results.pre['yql-coverage.js'], results.post['yql-coverage.js']);
+                        assert.equal(results.pre['event-base-ie-coverage.js'], results.post['event-base-ie-coverage.js']);
                     }
                 }
             }
@@ -106,4 +106,4 @@ var tests = {
     }
 };
 
-vows.describe('building yql').addBatch(tests).export(module);
+vows.describe('building event').addBatch(tests).export(module);
