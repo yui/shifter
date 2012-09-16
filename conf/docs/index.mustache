@@ -47,6 +47,7 @@
                                    --quiet to mute stdout from sub build
                                    all other build options accepted here: (--strict, --lint, etc)
        --jsstamp/--no-jsstamp  Should it stamp the JS with the YUI.add wrapper, defaults to --stamp
+       --istanbul              Use Istanbul code coverage instead of YUITest for coverage build
     Experimental Options:
        --semi                  Toggle on the strict semicolon checking in Uglify
        --cache/--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
@@ -95,6 +96,11 @@ directory below `assets`, shifter will do the right thing.
 </p>
 
 <p>Here is an example directory structure, it's easier to <a href="https://gist.github.com/bc923c17d33f2e0d006e">read than to explain</a>.</p>
+
+<h2 id="coverage">Code Coverage</h2>
+
+<p>When `shifter` builds a module, it auto generates a `-coverage` file generated with <a href="http://yuilibrary.com/yuitest">YUITest Code Coverage</a></p>
+<p>If you pass the `--istanbul` option, `shifter` will use the new <a href="https://github.com/gotwarlost/istanbul">Istanbul Code Coverage</a> tool.</p>
 
 <h2 id="meta">meta-data</h2>
 
