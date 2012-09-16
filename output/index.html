@@ -23,7 +23,7 @@
     <div class="yui3-g">
         <div class="yui3-u-3-4">
             <div id="main">
-                <div class="content"><h2 id="welcome-to-shifter-0027">welcome to shifter 0.0.27!</h2>
+                <div class="content"><h2 id="welcome-to-shifter-0028">welcome to shifter 0.0.28!</h2>
 
 <div class="intro">
 <center>
@@ -51,7 +51,7 @@
 
 <pre class="code terminal"><span class="noselect">$ </span>shifter -h
 
-blazingly fast builds with shifter@0.0.27
+blazingly fast builds with shifter@0.0.28
 
 pass no arguments and shifter will build the module from the current directory
 
@@ -70,6 +70,7 @@ pass no arguments and shifter will build the module from the current directory
                                --quiet to mute stdout from sub build
                                all other build options accepted here: (--strict, --lint, etc)
    --jsstamp&#x2F;--no-jsstamp  Should it stamp the JS with the YUI.add wrapper, defaults to --stamp
+   --istanbul              Use Istanbul code coverage instead of YUITest for coverage build
 Experimental Options:
    --semi                  Toggle on the strict semicolon checking in Uglify
    --cache&#x2F;--no-cache      Cache the results of the build and bail if building for no reason, defaults to --no-cache
@@ -118,6 +119,11 @@ directory below <code>assets</code>, shifter will do the right thing.
 </p>
 
 <p>Here is an example directory structure, it's easier to <a href="https://gist.github.com/bc923c17d33f2e0d006e">read than to explain</a>.</p>
+
+<h2 id="coverage">Code Coverage</h2>
+
+<p>When <code>shifter</code> builds a module, it auto generates a <code>-coverage</code> file generated with <a href="http://yuilibrary.com/yuitest">YUITest Code Coverage</a></p>
+<p>If you pass the <code>--istanbul</code> option, <code>shifter</code> will use the new <a href="https://github.com/gotwarlost/istanbul">Istanbul Code Coverage</a> tool.</p>
 
 <h2 id="meta">meta-data</h2>
 
@@ -484,7 +490,7 @@ I've added a <code>--lint-stderr</code> config option which forces all lint outp
                         <div class="bd">
                             <ul class="toc">
 <li>
-<a href="#welcome-to-shifter-0027">welcome to shifter 0.0.27!</a>
+<a href="#welcome-to-shifter-0028">welcome to shifter 0.0.28!</a>
 </li>
 <li>
 <a href="#what">what is shifter?</a>
@@ -506,6 +512,9 @@ I've added a <code>--lint-stderr</code> config option which forces all lint outp
 </li>
 <li>
 <a href="#skins">skin handling</a>
+</li>
+<li>
+<a href="#coverage">Code Coverage</a>
 </li>
 <li>
 <a href="#meta">meta-data</a>
