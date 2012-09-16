@@ -1,0 +1,110 @@
+{
+    "event": {
+        "use": [
+            "event-base",
+            "event-delegate",
+            "event-synthetic",
+            "event-mousewheel",
+            "event-mouseenter",
+            "event-key",
+            "event-focus",
+            "event-resize",
+            "event-hover",
+            "event-outside",
+            "event-touch",
+            "event-move",
+            "event-flick",
+            "event-valuechange",
+            "event-tap"
+        ],
+        "after": ["node-base"],
+        "submodules": {
+            "event-base": {
+                "after": ["node-base"],
+                "requires": [
+                    "event-custom-base"
+                ]
+            },
+            "event-synthetic": {
+                "requires": [
+                    "node-base",
+                    "event-custom-complex"
+                ]
+            },
+            "event-delegate": {
+                "requires": [
+                    "node-base"
+                ]
+            },
+            "event-focus": {
+                "requires": [
+                    "event-synthetic"
+                ]
+            },
+            "event-key": {
+                "requires": [
+                    "event-synthetic"
+                ]
+            },
+            "event-mouseenter": {
+                "requires": [
+                    "event-synthetic"
+                ]
+            },
+            "event-mousewheel": {
+                "requires": [
+                    "node-base"
+                ]
+            },
+            "event-resize": {
+                "requires": [
+                    "node-base",
+                    "event-synthetic"
+                ]
+            },
+            "event-hover": {
+                "requires": [
+                    "event-mouseenter"
+                ]
+            },
+            "event-outside": {
+                "requires": [
+                    "event-synthetic"
+                ]
+            },
+            "event-tap": {
+                "requires": [
+                    "node-base",
+                    "event-base",
+                    "event-touch",
+                    "event-synthetic"
+                ]
+            },
+            "event-contextmenu": {
+                "requires": [
+                    "event-synthetic",
+                    "dom-screen"
+                ]
+            }            
+        },
+        "plugins": {
+            "event-touch": {
+                "requires" : [
+                     "node-base"
+                ]
+            },
+            "event-base-ie": {
+                "requires": [
+                    "node-base"
+                ],
+                "after": [
+                    "event-base"
+                ],
+                "condition": {
+                   "trigger": "node-base",
+                   "test": "ie-base-test.js"
+                }
+            }
+        }
+    }
+}
