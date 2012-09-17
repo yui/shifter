@@ -175,4 +175,4 @@ http://yuilibrary.com/license/
 
 
 
-}, '@VERSION@', {"requires": ["jsonp", "jsonp-url"]});
+}, '1.2.3.4', {"requires": ["jsonp", "jsonp-url"]});

@@ -32,7 +32,8 @@ var tests = {
             'should build YQL and': {
                 topic: function() {
                     var child = spawn(shifter, [
-                        '--no-cache'
+                        '--no-cache',
+                        '--replace-version=1.2.3.4'
                     ], {
                         cwd: srcBase
                     });
