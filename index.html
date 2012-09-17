@@ -459,6 +459,17 @@ By default, lint warnings/errors are printed to <code>stdout</code>. But in the 
 I've added a <code>--lint-stderr</code> config option which forces all lint output to <code>stderr</code>.
 </p>
 
+<h3 id="exp.cli.replacers">CLI Replacers</h3>
+
+<p>You can pass <code>--replace-??=??</code> and <code>shifter</code> will attempt to replace these strings during the build.</p>
+
+<p><em>You MUST use the = to tell nopt that you want to assign the value to the dynamic option.</em></p>
+
+<p>Examples:</p>
+
+<pre class="code terminal">--replace-version=1.2.3 will replace @VERSION@ with 1.2.3
+--replace-foo=bar will replace @FOO@ with bar
+--replace-baz=bog will replace @BAZ@ with bog</pre>
 
 </div>
             </div>
@@ -556,6 +567,9 @@ I've added a <code>--lint-stderr</code> config option which forces all lint outp
 </li>
 <li>
 <a href="#exp.lint-stderr">Forcing lint to stderr</a>
+</li>
+<li>
+<a href="#exp.cli.replacers">CLI Replacers</a>
 </li>
 </ul>
 </li>
