@@ -443,4 +443,16 @@ By default, lint warnings/errors are printed to `stdout`. But in the case that y
 I've added a `--lint-stderr` config option which forces all lint output to `stderr`.
 </p>
 
+<h3 id="exp.cli.replacers">CLI Replacers</h3>
 
+<p>You can pass `--replace-??=??` and `shifter` will attempt to replace these strings during the build.</p>
+
+<p><em>You MUST use the = to tell nopt that you want to assign the value to the dynamic option.</em></p>
+
+<p>Examples:</p>
+
+```terminal
+--replace-version=1.2.3 will replace @VERSION@ with 1.2.3
+--replace-foo=bar will replace @FOO@ with bar
+--replace-baz=bog will replace @BAZ@ with bog
+```
