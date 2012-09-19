@@ -22,6 +22,22 @@ http://yuilibrary.com/license/
      * @param {Object} opts An object literal of configuration options (optional): proto (http|https), base (url)
      */
     var YQLRequest = function (sql, callback, params, opts) {
+        var _types = {
+            esc: {
+                token: '\uE000',
+                re: /\\[:\[\]\(\)#\.\'\>+~"]/gi
+            },
+
+            attr: {
+                token: '\uE001',
+                re: /(\[[^\]]*\])/g
+            },
+
+            pseudo: {
+                token: '\uE002',
+                re: /(\([^\)]*\))/g
+            }
+        };
         
         if (!params) {
             params = {};
