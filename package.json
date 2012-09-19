@@ -4,7 +4,7 @@
     "author": "Dav Glass <davglass@gmail.com>",
     "version": "0.0.31",
     "dependencies": {
-        "colors": "*",
+        "ansi-color": "*",
         "gear": "~0.7.0",
         "gear-lib": "~0.8.0",
         "nopt": "*",
