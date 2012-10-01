@@ -87,28 +87,12 @@ var tests = {
             assert.equal(topic.fail, true);
         }
     },
-    'should parse --lint defaults': {
-        topic: function() {
-            return args.parse(['', '', '--lint', 'defaults']);
-        },
-        'should parse defaults': function(topic) {
-            assert.equal(topic.lint, 'defaults');
-        }
-    },
     'should parse --lint preferred': {
         topic: function() {
             return args.parse(['', '', '--lint', 'preferred']);
         },
         'should parse defaults': function(topic) {
             assert.equal(topic.lint, 'preferred');
-        }
-    },
-    'should parse --lint strict': {
-        topic: function() {
-            return args.parse(['', '', '--lint', 'strict']);
-        },
-        'should parse defaults': function(topic) {
-            assert.equal(topic.lint, 'strict');
         }
     },
     'should parse --lint foobar as preferred': {

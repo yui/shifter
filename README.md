@@ -5,6 +5,14 @@ The purpose of this project is to replace YUI's use of our old ant [Builder](htt
 
 We have out grown our old builder, so it was time to build a new one!
 
+Linting
+-------
+
+As of `0.1.0`, [JSHint](http://jshint.com/) is the default lint tool used by `shifter`. We maintain a
+list of our lint preferences in the [yui-lint](https://github.com/yui/yui-lint) project. `shifter` will
+default to our rules unless `--lint config` is passed. Then it will search up the file tree and attempt
+to load your custom `.jshintrc` file.
+
 Documentation
 -------------
 
@@ -34,7 +42,6 @@ More detail can be found in the [documentation](http://yui.github.com/shifter/)
        -v/--version            show version
        -h/--help               show this stuff
        -m/--modules <module>   limit the modules to build (array: -m foo -m bar)
-       --lint [preferred|defaults|strict] (preferred is the default) lint mode: https://github.com/yui/yui-lint
        --strict                add "use strict" to module wrapper
        --walk                  Walk the current directory and shift all builds. (cd yui3/src && shifter --walk)
                                    -m/--modules also supported here for filtering
