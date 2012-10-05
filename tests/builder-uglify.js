@@ -107,4 +107,4 @@ var tests = {
     }
 };
 
-vows.describe('building yql').addBatch(tests).export(module);
+vows.describe('building yql with UglifyJS').addBatch(tests).export(module);

@@ -107,4 +107,4 @@ var tests = {
     }
 };
 
-vows.describe('building').addBatch(tests).export(module);
+vows.describe('building YQL with Compressor').addBatch(tests).export(module);

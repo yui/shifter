@@ -106,4 +106,4 @@ var tests = {
     }
 };
 
-vows.describe('building event').addBatch(tests).export(module);
+vows.describe('building event with UglifyJS').addBatch(tests).export(module);
