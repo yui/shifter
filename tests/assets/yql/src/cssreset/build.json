@@ -1,0 +1,10 @@
+{
+    "name": "cssreset",
+    "builds": {
+        "cssreset": {
+            "cssfiles": [
+                "cssreset.css"
+            ]
+        }
+    }
+}
