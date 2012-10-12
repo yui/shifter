@@ -33,7 +33,7 @@
     },
     "scripts": {
         "pretest": "jshint --config ./node_modules/yui-lint/jshint.json ./lib/*.js ./lib/*/*.js",
-        "test": "vows --spec ./tests/*.js"
+        "test": "istanbul test vows -- --spec ./tests/*.js"
     },
     "preferGlobal": "true",
     "bugs": { "url" : "http://github.com/yui/shifter/issues" },
