@@ -15,8 +15,16 @@ lint:
 
 docs: clean doc 
 
-deploydocs: docs
+
+coverage:
+	npm test --coverage
+	mkdir ../shifter-pages/coverage/
+	cp -R ./coverage/lcov-report/* ../shifter-pages/coverage/
+
+cleandeploy:
 	rm -rRf ../shifter-pages/*
+
+deploydocs: cleandeploy coverage docs
 	cp -R ./output/* ../shifter-pages/
 
-.PHONY: docs clean deploydocs lint
+.PHONY: docs clean deploydocs lint coverage
