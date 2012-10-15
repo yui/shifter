@@ -2,7 +2,7 @@
     "name": "shifter",
     "description": "New YUI build tool based on Gearjs, so let's shift some gears",
     "author": "Dav Glass <davglass@gmail.com>",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "dependencies": {
         "progress": "~0.1.0",
         "ansi-color": "*",
