@@ -19,7 +19,7 @@
         "rimraf": "*",
         "istanbul": "*",
         "which": "*",
-        "yuglify": "~0.0.1"
+        "yuglify": "~0.1.0"
     },
     "devDependencies": {
         "selleck": "*",
