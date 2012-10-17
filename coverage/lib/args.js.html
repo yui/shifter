@@ -179,16 +179,16 @@
     <h1>Code coverage report for <span class='entity'>lib/args.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>83.33% <small>(25 / 30)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>83.87% <small>(26 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>73.91% <small>(34 / 46)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>72% <small>(36 / 50)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class='metric'>50% <small>(2 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>83.33% <small>(25 / 30)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>83.87% <small>(26 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">lib/</a> &#187; args.js</div>
@@ -274,7 +274,9 @@
 77
 78
 79
-80</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+80
+81
+82</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -308,32 +310,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">35</span>
-<span class="cline-any cline-yes">35</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">35</span>
 <span class="cline-any cline-yes">35</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">35</span>
+<span class="cline-any cline-yes">35</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">35</span>
 <span class="cline-any cline-yes">35</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">35</span>
 <span class="cline-any cline-yes">35</span>
 <span class="cline-any cline-yes">35</span>
 <span class="cline-any cline-yes">35</span>
@@ -376,7 +380,8 @@ var nopt = require('nopt'),
         jsstamp: Boolean,
         list: Boolean,
         config: require('path'),
-        lint: [ 'config', false ]
+        lint: [ 'config', false ],
+        'global-config': Boolean
     },
     shorts = {
         "c": ["--config"],
@@ -417,6 +422,7 @@ var parse = function (args) {
     parsed.coverage = (parsed.coverage === undefined || parsed.coverage) ? true : false;
     parsed.exec = (parsed.exec === undefined || parsed.exec) ? true : false;
     parsed.progress = (parsed.progress === undefined || <span class="branch-1 cbranch-no" title="branch not covered" >parsed.progress)</span> ? true : <span class="branch-1 cbranch-no" title="branch not covered" >false;</span>
+    parsed['global-config'] = (parsed['global-config'] === undefined || <span class="branch-1 cbranch-no" title="branch not covered" >parsed['global-config'])</span> ? true : <span class="branch-1 cbranch-no" title="branch not covered" >false;</span>
 &nbsp;
     //Default false
     parsed.semi = (parsed.semi === undefined || <span class="branch-1 cbranch-no" title="branch not covered" >parsed.semi === false)</span> ? false : <span class="branch-1 cbranch-no" title="branch not covered" >true;</span>
@@ -437,7 +443,7 @@ exports.known = known;
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Oct 15 2012 12:21:23 GMT-0500 (CDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Wed Oct 17 2012 09:32:46 GMT-0500 (CDT)</div>
 </div>
 </body>
 
