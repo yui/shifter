@@ -293,6 +293,26 @@ merge them together, so your results may vary on this.</p>
 
 <p>`*` denotes that these properties can also be added to an individual `build` as well as globally.</p>
 
+<h3 id="build.config">global config file</h3>
+
+<p>`shifter` will walk up the working directory and search for the first `.shifter.json` file that it finds.
+It will then apply any configuration settings found in that config to the current `shifter` config. <em>(described above)</em>.
+Below is an example `.shifter.json`:
+</p>
+
+```
+{
+    "replace-yuiglobalvar": "FOO",
+    "replace-yuivar": "F",
+    "replace-version": "1.2.3.4",
+    "lint": false,
+    "coverage": false
+}
+```
+<p>
+You can force `shifter` to ignore this file with the `--no-global-config` option to the cli. <em>CLI options will override the options in the config</em>
+</p>
+
 <h3 id="build.json-builds">`builds` properties</h3>
 
 <p>Properties available on the `builds` property.</p>
