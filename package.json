@@ -17,7 +17,7 @@
         "cpr": "~0.0.4",
         "mkdirp": "*",
         "rimraf": "*",
-        "istanbul": "*",
+        "istanbul": "~0.1.8",
         "which": "*",
         "yuglify": "~0.1.0"
     },
@@ -33,7 +33,7 @@
     },
     "scripts": {
         "pretest": "jshint --config ./node_modules/yui-lint/jshint.json ./lib/*.js ./lib/*/*.js",
-        "test": "istanbul test vows -- --spec ./tests/*.js"
+        "test": "istanbul cover --print both vows -- --spec ./tests/*.js"
     },
     "preferGlobal": "true",
     "bugs": { "url" : "http://github.com/yui/shifter/issues" },
