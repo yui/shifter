@@ -23,7 +23,7 @@
     <div class="yui3-g">
         <div class="yui3-u-3-4">
             <div id="main">
-                <div class="content"><h2 id="welcome-to-shifter-015">welcome to shifter 0.1.5!</h2>
+                <div class="content"><h2 id="welcome-to-shifter-016">welcome to shifter 0.1.6!</h2>
 
 <div class="intro">
 <center>
@@ -51,7 +51,7 @@
 
 <pre class="code terminal"><span class="noselect">$ </span>shifter -h
 
-blazingly fast builds with shifter@0.1.5
+blazingly fast builds with shifter@0.1.6
 
 pass no arguments and shifter will build the module from the current directory
 
@@ -311,6 +311,25 @@ merge them together, so your results may vary on this.</p>
 
 <p><code>*</code> denotes that these properties can also be added to an individual <code>build</code> as well as globally.</p>
 
+<h3 id="build.config">global config file</h3>
+
+<p><code>shifter</code> will walk up the working directory and search for the first <code>.shifter.json</code> file that it finds.
+It will then apply any configuration settings found in that config to the current <code>shifter</code> config. <em>(described above)</em>.
+Below is an example <code>.shifter.json</code>:
+</p>
+
+<pre class="code prettyprint">{
+    &quot;replace-yuiglobalvar&quot;: &quot;FOO&quot;,
+    &quot;replace-yuivar&quot;: &quot;F&quot;,
+    &quot;replace-version&quot;: &quot;1.2.3.4&quot;,
+    &quot;lint&quot;: false,
+    &quot;coverage&quot;: false
+}</pre>
+
+<p>
+You can force <code>shifter</code> to ignore this file with the <code>--no-global-config</code> option to the cli. <em>CLI options will override the options in the config</em>
+</p>
+
 <h3 id="build.json-builds"><code>builds</code> properties</h3>
 
 <p>Properties available on the <code>builds</code> property.</p>
@@ -503,7 +522,7 @@ I've added a <code>--lint-stderr</code> config option which forces all lint outp
                         <div class="bd">
                             <ul class="toc">
 <li>
-<a href="#welcome-to-shifter-015">welcome to shifter 0.1.5!</a>
+<a href="#welcome-to-shifter-016">welcome to shifter 0.1.6!</a>
 </li>
 <li>
 <a href="#what">what is shifter?</a>
@@ -540,6 +559,9 @@ I've added a <code>--lint-stderr</code> config option which forces all lint outp
 <ul class="toc">
 <li>
 <a href="#build.json-root">root properties</a>
+</li>
+<li>
+<a href="#build.config">global config file</a>
 </li>
 <li>
 <a href="#build.json-builds"><code>builds</code> properties</a>
