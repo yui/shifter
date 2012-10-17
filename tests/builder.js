@@ -33,6 +33,7 @@ var tests = {
                 topic: function() {
                     var child = spawn(shifter, [
                         '--no-cache',
+                        '--no-global-config',
                         '--compressor'
                     ], {
                         cwd: srcBase

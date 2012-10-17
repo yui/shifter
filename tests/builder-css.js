@@ -32,6 +32,7 @@ var tests = {
             'should build cssreset and': {
                 topic: function() {
                     var child = spawn(shifter, [
+                        '--no-global-config',
                         '--no-cache'
                     ], {
                         cwd: srcBase

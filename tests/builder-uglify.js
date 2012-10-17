@@ -32,6 +32,7 @@ var tests = {
             'should build YQL and': {
                 topic: function() {
                     var child = spawn(shifter, [
+                        '--no-global-config',
                         '--no-cache',
                         '--replace-version=1.2.3.4'
                     ], {

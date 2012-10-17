@@ -32,6 +32,7 @@ var tests = {
             'should build Event Base IE and': {
                 topic: function() {
                     var child = spawn(shifter, [
+                        '--no-global-config',
                         '--no-cache'
                     ], {
                         cwd: srcBase
