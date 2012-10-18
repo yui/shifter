@@ -8,5 +8,5 @@ CVS/
 .svn
 *~
 .com.apple.timemachine.supported
-tests/assets/yql/build/*/*.js
+tests/assets/yql/build/*/*
 coverage
