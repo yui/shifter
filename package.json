@@ -28,6 +28,7 @@
     "keywords": [
         "builder", "gearjs", "yui", "yuilibrary", "cli"
     ],
+    "main": "./lib/index.js",
     "bin": {
         "shifter": "./bin/shifter"
     },
