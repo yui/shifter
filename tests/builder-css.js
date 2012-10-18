@@ -4,7 +4,7 @@ var vows = require('vows'),
     fs = require('fs'),
     Stack = require('../lib/stack').Stack,
     spawn = require('child_process').spawn,
-    shifter = path.join(__dirname, '../bin/shifter'),
+    shifter = require('../lib'),
     base = path.join(__dirname, 'assets/yql/'),
     crypto = require('crypto'),
     buildBase = path.join(base, 'build'),
@@ -31,14 +31,12 @@ var tests = {
             },
             'should build cssreset and': {
                 topic: function() {
-                    var child = spawn(shifter, [
-                        '--no-global-config',
-                        '--no-cache'
-                    ], {
-                        cwd: srcBase
-                    });
-
-                    child.on('exit', this.callback);
+                    shifter.init({
+                        silent: true,
+                        cwd: srcBase,
+                        'global-config': false,
+                        'cache': false
+                    }, this.callback);
                 },
                 'should create build dir and': {
                     topic: function() {

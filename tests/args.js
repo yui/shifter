@@ -19,6 +19,9 @@ var argsTests = {
     '--compressor': 'compressor',
     '--list': 'list',
     '--exec': 'exec',
+    '--semi': 'semi',
+    '--istanbul': 'istanbul',
+    '--progress': 'progress',
     '--coverage': 'coverage',
     '--lint-stderr': 'lint-stderr',
     '-w': 'walk'
@@ -55,12 +58,44 @@ var tests = {
             assert.equal(topic.cache, false);
         }
     },
+    'should parse --no-lint': {
+        topic: function() {
+            return args.parse(['', '', '--no-lint']);
+        },
+        'lint should be false': function(topic) {
+            assert.isFalse(topic.lint);
+        }
+    },
     'should parse --no-cache': {
         topic: function() {
             return args.parse(['', '', '--no-cache']);
         },
         'cache should be false': function(topic) {
             assert.equal(topic.cache, false);
+        }
+    },
+    'should parse --no-progress': {
+        topic: function() {
+            return args.parse(['', '', '--no-progress']);
+        },
+        'progress should be false': function(topic) {
+            assert.isFalse(topic.progress);
+        }
+    },
+    'should parse --no-istanbul': {
+        topic: function() {
+            return args.parse(['', '', '--no-istanbul']);
+        },
+        'istanbul should be false': function(topic) {
+            assert.isFalse(topic.istanbul);
+        }
+    },
+    'should parse --no-semi': {
+        topic: function() {
+            return args.parse(['', '', '--no-semi']);
+        },
+        'semi should be false': function(topic) {
+            assert.isFalse(topic.semi);
         }
     },
     'should not parse --no-fail': {
@@ -188,6 +223,35 @@ var tests = {
         },
         'parsed as false': function(topic) {
             assert.isFalse(topic['lint-stderr']);
+        }
+    },
+    'args.has(foo) (not an argument)': {
+        topic: function() {
+            return args.has('foo')
+        },
+        'should return false': function (topic) {
+            assert.isFalse(topic);
+        }
+    },
+    'args.has(spec) (vows argument)': {
+        topic: function() {
+            return args.has('spec')
+        },
+        'should return true': function (topic) {
+            assert.isTrue(topic);
+        }
+    },
+    'args.defaults() should process raw args': {
+        topic: function() {
+            return args.defaults();
+        },
+        'should do something': function(topic) {
+            assert.ok(topic.spec); //from vows
+            assert.ok(topic.jsstamp);
+            assert.ok(topic.coverage);
+            assert.ok(topic.exec);
+            assert.isFalse(topic.quiet);
+            assert.isFalse(topic.cache);
         }
     }
 };

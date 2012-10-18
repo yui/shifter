@@ -4,7 +4,7 @@ var vows = require('vows'),
     fs = require('fs'),
     Stack = require('../lib/stack').Stack,
     spawn = require('child_process').spawn,
-    shifter = path.join(__dirname, '../bin/shifter'),
+    shifter = require('../lib'),
     base = path.join(__dirname, 'assets/yql/'),
     crypto = require('crypto'),
     buildBase = path.join(base, 'build'),
@@ -12,6 +12,7 @@ var vows = require('vows'),
     srcBase = path.join(base, 'src/yql'),
     rimraf = require('rimraf');
 
+process.env.SHIFTER_COMPRESSOR_TASKS = 1;
 
 var tests = {
     'clean build': {
@@ -31,15 +32,12 @@ var tests = {
             },
             'should build YQL and': {
                 topic: function() {
-                    var child = spawn(shifter, [
-                        '--no-cache',
-                        '--no-global-config',
-                        '--compressor'
-                    ], {
-                        cwd: srcBase
-                    });
-
-                    child.on('exit', this.callback);
+                    shifter.init({
+                        cwd: srcBase,
+                        compressor: true,
+                        'global-config': false,
+                        'cache': false
+                    }, this.callback);
                 },
                 'should create build dir and': {
                     topic: function() {
