@@ -47,6 +47,7 @@ var tests = {
                         fail: true,
                         'cache': false
                     }, function() {
+                        process.exit = _exit;
                         self.callback(null, {
                             code: code
                         });
