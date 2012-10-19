@@ -14,7 +14,7 @@
         "yui-lint": "~0.1.1",
         "jshint": "~0.9.0",
         "watch": "*",
-        "cpr": "~0.0.4",
+        "cpr": "~0.0.6",
         "mkdirp": "*",
         "rimraf": "*",
         "istanbul": "~0.1.8",
