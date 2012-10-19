@@ -1,5 +1,9 @@
 {
     "name": "uploader",
+    "shifter": {
+        "replace-yuivar": "F",
+        "replace-yuiglobalvar": "FOO"
+    },
     "builds": {
         "uploader": {
             "copy": [

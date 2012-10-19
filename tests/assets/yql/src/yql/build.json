@@ -2,6 +2,13 @@
     "name": "yql",
     "builds": {
         "yql": {
+            "exec": [
+                "shifter --config test.json",
+                "echo 'Foobar'"
+            ],
+            "postexec": [
+                "./scripts/postexec.js"
+            ],
             "jsfiles": [
                 "yql.js"
             ]

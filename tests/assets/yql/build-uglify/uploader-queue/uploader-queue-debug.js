@@ -1,4 +1,4 @@
-YUI.add('uploader-queue', function (Y, NAME) {
+FOO.add('uploader-queue', function (F, NAME) {
 
 
     /**

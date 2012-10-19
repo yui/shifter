@@ -1,4 +1,4 @@
-YUI.add('uploader-html5', function (Y, NAME) {
+FOO.add('uploader-html5', function (F, NAME) {
 
 
     /**

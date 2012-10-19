@@ -1,4 +1,4 @@
-YUI.add('uploader', function (Y, NAME) {
+FOO.add('uploader', function (F, NAME) {
 
 /**
  * Provides UI for selecting multiple files and functionality for 

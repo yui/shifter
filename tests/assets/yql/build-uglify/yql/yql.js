@@ -11,7 +11,7 @@ http://yuilibrary.com/license/
     /**
      * This class adds a sugar class to allow access to YQL (http://developer.yahoo.com/yql/).
      * @module yql
-     */     
+     */
     /**
      * Utility Class used under the hood my the YQL class
      * @class YQLRequest
@@ -22,7 +22,7 @@ http://yuilibrary.com/license/
      * @param {Object} opts An object literal of configuration options (optional): proto (http|https), base (url)
      */
     var YQLRequest = function (sql, callback, params, opts) {
-        var _types = {
+        this._types = {
             esc: {
                 token: '\uE000',
                 re: /\\[:\[\]\(\)#\.\'\>+~"]/gi
@@ -38,7 +38,7 @@ http://yuilibrary.com/license/
                 re: /(\([^\)]*\))/g
             }
         };
-        
+
         if (!params) {
             params = {};
         }
@@ -57,18 +57,18 @@ http://yuilibrary.com/license/
             this._context = opts.context;
             delete opts.context;
         }
-        
+
         if (params && params.context) {
             this._context = params.context;
             delete params.context;
         }
-        
+
         this._params = params;
         this._opts = opts;
         this._callback = callback;
 
     };
-    
+
     YQLRequest.prototype = {
         /**
         * @private
@@ -115,17 +115,18 @@ http://yuilibrary.com/license/
         * @return {YQLRequest}
         */
         send: function() {
-            var qs = [], url = ((this._opts && this._opts.proto) ? this._opts.proto : Y.YQLRequest.PROTO);
+            var qs = [], url = ((this._opts && this._opts.proto) ? this._opts.proto : Y.YQLRequest.PROTO),
+            o;
 
             Y.each(this._params, function(v, k) {
                 qs.push(k + '=' + encodeURIComponent(v));
             });
 
             qs = qs.join('&');
-            
+
             url += ((this._opts && this._opts.base) ? this._opts.base : Y.YQLRequest.BASE_URL) + qs;
-            
-            var o = (!Y.Lang.isFunction(this._callback)) ? this._callback : { on: { success: this._callback } };
+
+            o = (!Y.Lang.isFunction(this._callback)) ? this._callback : { on: { success: this._callback } };
 
             o.on = o.on || {};
             this._callback = o.on.success;
@@ -135,7 +136,7 @@ http://yuilibrary.com/license/
             if (o.allowCache !== false) {
                 o.allowCache = true;
             }
-            
+
             if (!this._jsonp) {
                 this._jsonp = Y.jsonp(url, o);
             } else {
@@ -173,9 +174,9 @@ http://yuilibrary.com/license/
     * @description The environment file to load: http://datatables.org/alltables.env
     */
     YQLRequest.ENV = 'http:/'+'/datatables.org/alltables.env';
-    
+
     Y.YQLRequest = YQLRequest;
-	
+
     /**
      * This class adds a sugar class to allow access to YQL (http://developer.yahoo.com/yql/).
      * @class YQL
@@ -185,7 +186,7 @@ http://yuilibrary.com/license/
      * @param {Object} params An object literal of extra parameters to pass along (optional).
      * @param {Object} opts An object literal of configuration options (optional): proto (http|https), base (url)
      */
-	Y.YQL = function(sql, callback, params, opts) {
+    Y.YQL = function(sql, callback, params, opts) {
         return new Y.YQLRequest(sql, callback, params, opts).send();
     };
 

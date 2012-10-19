@@ -1,4 +1,4 @@
-YUI.add('uploader-flash', function (Y, NAME) {
+FOO.add('uploader-flash', function (F, NAME) {
 
 
     /**
