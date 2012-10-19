@@ -31,14 +31,29 @@ var tests = {
             },
             'should build Calendar and': {
                 topic: function() {
-                    var self = this;
+                    var self = this,
+                        _exit = process.exit,
+                        code;
+
+                    process.exit = function(c) {
+                        code = c;
+                    };
 
                     shifter.init({
                         silent: true,
                         cwd: srcBase,
                         'global-config': false,
+                        'lint-stderr': true,
+                        fail: true,
                         'cache': false
-                    }, this.callback);
+                    }, function() {
+                        self.callback(null, {
+                            code: code
+                        });
+                    });
+                },
+                'should have failed with lint errors': function(topic) {
+                    assert.equal(topic.code, 1);
                 },
                 'should create build dir and': {
                     topic: function() {

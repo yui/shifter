@@ -37,6 +37,7 @@ var tests = {
                         compressor: false,
                         'global-config': false,
                         'cache': false,
+                        lint: 'config',
                         'replace-version': '1.2.3.4'
                     }, this.callback);
                 },

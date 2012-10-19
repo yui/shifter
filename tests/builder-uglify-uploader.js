@@ -37,6 +37,7 @@ var tests = {
                         silent: true,
                         cwd: srcBase,
                         istanbul: true,
+                        lint: false,
                         'global-config': false,
                         'cache': false
                     }, this.callback);

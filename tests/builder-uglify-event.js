@@ -47,6 +47,15 @@ var tests = {
                         assert.isTrue(stat.isDirectory());
                     }
                 },
+                'should create rollup build dir and': {
+                    topic: function() {
+                        fs.stat(path.join(buildBase, 'event-base'), this.callback);
+                    },
+                    'should create build/event-base': function(err, stat) {
+                        assert.isNull(err);
+                        assert.isTrue(stat.isDirectory());
+                    }
+                },
                 'should produce same files and': {
                     topic: function() {
                         var stack = new Stack();
@@ -98,6 +107,59 @@ var tests = {
                     },
                     'coverage should be same': function(err, results) {
                         assert.equal(results.pre['event-base-ie-coverage.js'], results.post['event-base-ie-coverage.js']);
+                    }
+                },
+                'should produce same rollup files and': {
+                    topic: function() {
+                        var stack = new Stack();
+                        var results = {
+                            pre: {},
+                            post: {}
+                        },
+                        self = this;
+
+                        fs.readdir(path.join(buildBase, 'event-base'), stack.add(function(err, files) {
+                            files.forEach(function(file) {
+                                (function(file) {
+                                    fs.readFile(path.join(buildBase, 'event-base', file), stack.add(function(err, data) {
+                                        var shasum = crypto.createHash('sha1');
+                                        shasum.update(data);
+                                        var d = shasum.digest('hex');
+                                        results.post[file] = d;
+                                    }));
+                                }(file));
+                            });
+                        }));
+                        
+                        fs.readdir(path.join(buildXBase, 'event-base'), stack.add(function(err, files) {
+                            files.forEach(function(file) {
+                                (function(file) {
+                                    fs.readFile(path.join(buildXBase, 'event-base', file), stack.add(function(err, data) {
+                                        var shasum = crypto.createHash('sha1');
+                                        shasum.update(data);
+                                        var d = shasum.digest('hex');
+                                        results.pre[file] = d;
+                                    }));
+                                }(file));
+                            });
+                        }));
+                        
+                        stack.done(function() {
+                            self.callback(null, results);
+                        });
+
+                    },
+                    'min should be same with UglifyJS': function(err, results) {
+                        assert.equal(results.pre['event-base-min.js'], results.post['event-base-min.js']);
+                    },
+                    'raw should be same': function(err, results) {
+                        assert.equal(results.pre['event-base.js'], results.post['event-base.js']);
+                    },
+                    'debug should be same': function(err, results) {
+                        assert.equal(results.pre['event-base-debug.js'], results.post['event-base-debug.js']);
+                    },
+                    'coverage should be same': function(err, results) {
+                        assert.equal(results.pre['event-base-coverage.js'], results.post['event-base-coverage.js']);
                     }
                 }
             }
