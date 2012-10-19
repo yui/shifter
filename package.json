@@ -33,7 +33,7 @@
         "shifter": "./bin/shifter"
     },
     "scripts": {
-        "pretest": "jshint --config ./node_modules/yui-lint/jshint.json ./lib/*.js ./lib/*/*.js",
+        "pretest": "jshint --config ./node_modules/yui-lint/jshint.json ./lib/ ./lib/tasks/",
         "test": "istanbul cover --print both vows -- --spec ./tests/*.js"
     },
     "preferGlobal": "true",
