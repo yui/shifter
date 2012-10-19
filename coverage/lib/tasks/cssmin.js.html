@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
 <head>
-    <title>Code coverage report for All files</title>
+    <title>Code coverage report for lib/tasks/cssmin.js</title>
+    
+        <link rel='stylesheet' href='../../prettify.css'>
     
     <style type='text/css'>
         body, html {
@@ -174,74 +176,77 @@
 </head>
 <body>
 <div class='header high'>
-    <h1>Code coverage report for <span class='entity'>All files</span></h1>
+    <h1>Code coverage report for <span class='entity'>lib/tasks/cssmin.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>86.6% <small>(737 / 851)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>100% <small>(4 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>77.87% <small>(380 / 488)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>90.91% <small>(140 / 154)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class='metric'>100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>86.59% <small>(736 / 850)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>100% <small>(4 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
-    <div class="path"></div>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">lib/tasks/</a> &#187; cssmin.js</div>
 </div>
 <div class='body'>
-<div class="coverage-summary">
-<table>
-<thead>
-<tr>
-   <th data-col="file" data-fmt="html" data-html="true" class="file">File</th>
-   <th data-col="pic" data-type="number" data-fmt="html" data-html="true" class="pic"></th>
-   <th data-col="statements" data-type="number" data-fmt="pct" class="pct">Statements</th>
-   <th data-col="statements_raw" data-type="number" data-fmt="html" class="abs"></th>
-   <th data-col="branches" data-type="number" data-fmt="pct" class="pct">Branches</th>
-   <th data-col="branches_raw" data-type="number" data-fmt="html" class="abs"></th>
-   <th data-col="functions" data-type="number" data-fmt="pct" class="pct">Functions</th>
-   <th data-col="functions_raw" data-type="number" data-fmt="html" class="abs"></th>
-   <th data-col="lines" data-type="number" data-fmt="pct" class="pct">Lines</th>
-   <th data-col="lines_raw" data-type="number" data-fmt="html" class="abs"></th>
-</tr>
-</thead>
-<tbody><tr>
-	<td class="file high" data-value="lib/"><a href="lib/index.html">lib/</a></td>
-	<td data-value="84.17" class="pic high"><span class="cover-fill" style="width: 84px;"></span><span class="cover-empty" style="width:16px;"></span></td>
-	<td data-value="84.17" class="pct high">84.17%</td>
-	<td data-value="720" class="abs high">(606&nbsp;/&nbsp;720)</td>
-	<td data-value="74.52" class="pct medium">74.52%</td>
-	<td data-value="416" class="abs medium">(310&nbsp;/&nbsp;416)</td>
-	<td data-value="88.89" class="pct high">88.89%</td>
-	<td data-value="126" class="abs high">(112&nbsp;/&nbsp;126)</td>
-	<td data-value="84.14" class="pct high">84.14%</td>
-	<td data-value="719" class="abs high">(605&nbsp;/&nbsp;719)</td>
-	</tr>
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+Copyright (c) 2012, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://yuilibrary.com/license/
+*/
+&nbsp;
+var yuglify = require('yuglify');
+&nbsp;
+exports.cssmin = function (options, blob, done) {
+    yuglify.cssmin(blob.result, function(err, smashed) {
+        done(null, new blob.constructor(smashed, blob));
+    });
+};
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
 
-<tr>
-	<td class="file high" data-value="lib/tasks/"><a href="lib/tasks/index.html">lib/tasks/</a></td>
-	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
-	<td data-value="100" class="pct high">100%</td>
-	<td data-value="131" class="abs high">(131&nbsp;/&nbsp;131)</td>
-	<td data-value="97.22" class="pct high">97.22%</td>
-	<td data-value="72" class="abs high">(70&nbsp;/&nbsp;72)</td>
-	<td data-value="100" class="pct high">100%</td>
-	<td data-value="28" class="abs high">(28&nbsp;/&nbsp;28)</td>
-	<td data-value="100" class="pct high">100%</td>
-	<td data-value="131" class="abs high">(131&nbsp;/&nbsp;131)</td>
-	</tr>
-
-</tbody>
-</table>
-</div>
 </div>
 <div class='footer'>
     <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Oct 19 2012 15:09:05 GMT-0500 (CDT)</div>
 </div>
 </body>
+
+<script src="../../prettify.js"></script>
 
 <script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
