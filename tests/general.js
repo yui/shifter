@@ -5,6 +5,7 @@ var vows = require('vows'),
     timer = require('../lib/timer'),
     pack = require('../lib/pack'),
     shifter = require('../lib/'),
+    Stack = require('../lib/stack').Stack,
     util = require('../lib/util');
 
 var tests = {
@@ -108,30 +109,6 @@ var tests = {
             assert.ok(topic.json.builds.yql.config);
         }
     },
-    'should stamp js files with strict': {
-        topic: function() {
-            var self = this,
-                jsstamp = require('../lib/tasks/jsstamp').jsstamp;
-
-            jsstamp({
-                strict: true
-            }, {
-                result: '',
-                constructor: function(result) {
-                    this.result = result;
-                    this.get = function() {
-                        return this.result;
-                    }
-                }
-            }, function(err, blob) {
-                self.callback(null, blob);
-            });
-        },
-        'done': function(topic) {
-            assert.ok(topic.get());
-            assert.equal(topic.get(), ' "use strict";\n');
-        }
-    },
     'should throw on uglify error in callback': {
         topic: function() {
             var self = this,
@@ -180,6 +157,25 @@ var tests = {
 
             md5check({
                 current: path.join(__dirname, 'foobar.js')
+            }, {
+                result: '',
+                constructor: function(result) {
+                }
+            }, function(err, blob) {
+                self.callback(null, err);
+            });
+        },
+        'should have proper error message': function(topic) {
+            assert.isNull(topic);
+        }
+    },
+    'md5check should skip on directory': {
+        topic: function() {
+            var self = this,
+                md5check = require('../lib/tasks/md5').md5check;
+
+            md5check({
+                current: path.join(__dirname)
             }, {
                 result: '',
                 constructor: function(result) {
@@ -250,6 +246,347 @@ var tests = {
             assert.equal(status, 1);
 
             process.exit = exit;
+        }
+    },
+    'general tasks': {
+        'tasks/check': {
+            topic: function() {
+                return require('../lib/tasks/check').check;
+            },
+            'should be a function': function(topic) {
+                assert.isFunction(topic);
+            },
+            'and should produce an error on empty results': function(topic) {
+                topic({}, {
+                    result: '',
+                    name: 'foo.txt'
+                }, function(err) {
+                    assert.equal(err, 'writing zero length file from foo.txt');
+                });
+            }
+        },
+        'tasks/wrap': {
+            topic: function() {
+                return require('../lib/tasks/wrap').wrap;
+            },
+            'should be a function': function(topic) {
+                assert.isFunction(topic);
+            },
+            'and should work with no options': function(topic) {
+                topic(null, {
+                    result: 'foobar',
+                    constructor: function(result) {
+                        this.get = function() {
+                            return result;
+                        }
+                    }
+                }, function(err, blob) {
+                    assert.equal(blob.get(), 'foobar');
+                });
+            },
+            'should append a file': {
+                topic: function() {
+                    var wrap =  require('../lib/tasks/wrap').wrap;
+                    wrap({
+                        append: path.join(__dirname, 'assets', 'append.txt')
+                    }, {
+                        result: 'foobar',
+                        constructor: function(result) {
+                            this.get = function() {
+                                return result;
+                            }
+                        }
+                    }, this.callback);
+                },
+                'should have the data': function(topic) {
+                    assert.equal(topic.get(), 'foobarAPPEND\n');
+                }
+            },
+            'should prepend a file': {
+                topic: function() {
+                    var wrap =  require('../lib/tasks/wrap').wrap;
+                    wrap({
+                        prepend: [
+                            './does/not/exist',
+                            path.join(__dirname, 'assets', 'prepend.txt')
+                        ]
+                    }, {
+                        result: 'foobar',
+                        constructor: function(result) {
+                            this.get = function() {
+                                return result;
+                            }
+                        }
+                    }, this.callback);
+                },
+                'should have the data': function(topic) {
+                    assert.equal(topic.get(), 'PREPEND\nfoobar');
+                }
+            }
+        },
+        'tasks/cssstamp': {
+            topic: function() {
+                return require('../lib/tasks/cssstamp').cssstamp;
+            },
+            'should be a function': function(topic) {
+                assert.isFunction(topic);
+            },
+            'and should return expected with no options': function(topic) {
+                topic(null, {
+                    result: 'foobar',
+                    constructor: function(result) {
+                        this.get = function() {
+                            return result;
+                        }
+                    }
+                }, function(err, blob) {
+                    assert.equal(blob.get(), 'foobar\n\n');
+                });
+            },
+            'and should return expected with options': function(topic) {
+                topic({
+                    stamp: 'baz'
+                }, {
+                    result: 'foobar',
+                    constructor: function(result) {
+                        this.get = function() {
+                            return result;
+                        }
+                    }
+                }, function(err, blob) {
+                    assert.equal(blob.get(), 'foobar\nbaz\n');
+                });
+            }
+        },
+        'tasks/jshint': {
+            topic: function() {
+                return require('../lib/tasks/jshint').jshint;
+            },
+            'should be a function': function(topic) {
+                assert.isFunction(topic);
+            },
+            'and should return expected with no options': function(topic) {
+                topic(null, {
+                    result: 'var foo = "bar";',
+                    constructor: function(blob, opts) {
+                        this.get = function() {
+                            return opts;
+                        }
+                    }
+                }, function(err, blob) {
+                    assert.equal(blob.result, 'var foo = "bar";');
+                });
+            }
+        },
+        'tasks/coverage': {
+            topic: function() {
+                return require('../lib/tasks/coverage').coverage;
+            },
+            'should be a function': function(topic) {
+                assert.isFunction(topic);
+            },
+            'and should return expected (istanbul) with no options': function(topic) {
+                topic(null, {
+                    result: 'var foo = "bar";',
+                    constructor: function(data) {
+                        this.get = function() {
+                            return data;
+                        }
+                    }
+                }, function(err, blob) {
+                    assert.ok(blob.get().indexOf('__coverage__') !== -1);
+                });
+            },
+            'and should return error (istanbul) with no options': function(topic) {
+                topic(null, {
+                    result: 'var foo + "bar";',
+                    constructor: function(data) {
+                        this.get = function() {
+                            return data;
+                        }
+                    }
+                }, function(err, blob) {
+                    assert.equal(err.message, 'Line 1: Unexpected token +');
+                });
+            },
+            'should use yuitest': {
+                topic: function() {
+                    var cover = require('../lib/tasks/coverage').coverage;
+                    
+                    cover({
+                        type: 'yuitest'
+                    }, {
+                        result: 'var foo = "bar";',
+                        constructor: function(data) {
+                            this.get = function() {
+                                return data;
+                            }
+                        }
+                    }, this.callback);
+                },
+                'and should return expected (yuitest)': function(topic) {
+                    assert.ok(topic.get().indexOf('_yuitest_coverage') !== -1);
+                }
+            },
+            'should use yuitest and produce error': {
+                topic: function() {
+                    var cover = require('../lib/tasks/coverage').coverage,
+                        self = this;
+                    cover({
+                        type: 'yuitest'
+                    }, {
+                        result: 'var foo + "bar";',
+                        constructor: function(data) {
+                            this.get = function() {
+                                return data;
+                            }
+                        }
+                    }, function(err) {
+                        self.callback(null, err);
+                    });
+                },
+                'and should return error (yuitest)': function(topic) {
+                    assert.equal(topic, "line 1:8 no viable alternative at input '+'\n");
+                }
+            }
+        },
+        'tasks/jsstamp': {
+            topic: function() {
+                var self = this,
+                    jsstamp = require('../lib/tasks/jsstamp').jsstamp;
+
+                jsstamp({
+                    strict: true
+                }, {
+                    result: '',
+                    constructor: function(result) {
+                        this.result = result;
+                        this.get = function() {
+                            return this.result;
+                        }
+                    }
+                }, function(err, blob) {
+                    self.callback(null, blob);
+                });
+            },
+            'use strict was applied': function(topic) {
+                assert.ok(topic.get());
+                assert.equal(topic.get(), ' "use strict";\n');
+            },
+            'use strict with spaces': {
+                topic: function() {
+                    var self = this,
+                        jsstamp = require('../lib/tasks/jsstamp').jsstamp;
+
+                    jsstamp({
+                        strict: true
+                    }, {
+                        result: '  foobar',
+                        constructor: function(result) {
+                            this.result = result;
+                            this.get = function() {
+                                return this.result;
+                            }
+                        }
+                    }, function(err, blob) {
+                        self.callback(null, blob);
+                    });
+                },
+                'use strict was applied': function(topic) {
+                    assert.ok(topic.get());
+                    assert.equal(topic.get(), '  "use strict";\n  foobar');
+                },
+            },
+            'no options': {
+                topic: function() {
+                    var self = this,
+                        jsstamp = require('../lib/tasks/jsstamp').jsstamp;
+
+                    jsstamp(null, {
+                        result: '',
+                        constructor: function(result) {
+                            this.result = result;
+                            this.get = function() {
+                                return this.result;
+                            }
+                        }
+                    }, function(err, blob) {
+                        self.callback(null, blob);
+                    });
+                },
+                'valid return': function(topic) {
+                    assert.equal(topic.get(), '');
+                }
+            }
+        },
+        'tasks/compressor': {
+            topic: function() {
+                var compressor = require('../lib/tasks/compressor').compressor;
+                return compressor;
+            },
+            'should return a function': function(topic) {
+                assert.isFunction(topic);
+            },
+            'compress with no options': {
+                topic: function(topic) {
+                    topic(null, {
+                        result: "var foo = bar;",
+                        constructor: function(result) {
+                            this.result = result;
+                            this.get = function() {
+                                return this.result;
+                            }
+                        }
+                    }, this.callback);
+                },
+                'should return': function(topic) {
+                    assert.equal(topic.get(), "var foo=bar;");
+                }
+            },
+            'compress with error': {
+                topic: function(topic) {
+                    var self = this;
+                    topic(null, {
+                        result: "var foo + bar;",
+                        constructor: function(result) {
+                            this.result = result;
+                            this.get = function() {
+                                return this.result;
+                            }
+                        }
+                    }, function(err) {
+                        self.callback(null, err);
+                    });
+                },
+                'should return error': function(topic) {
+                    assert.ok(topic.indexOf('[ERROR] 1:10:missing ; before statement') > -1);
+                }
+            },
+            'compress many': {
+                topic: function(topic) {
+                    var stack = new Stack(),
+                        self = this, results = [];
+                    for (var i = 0; i < 10; i++) {
+                        topic(null, {
+                            result: "var foo = bar;",
+                            constructor: function(result) {
+                                this.result = result;
+                                this.get = function() {
+                                    return this.result;
+                                }
+                            }
+                        }, stack.add(function(err, blob) {
+                            results.push(blob.result);
+                        }));
+                    }
+                    stack.done(function() {
+                        self.callback(null, results);
+                    });
+                },
+                'should return all items': function(topic) {
+                    assert.equal(topic.length, 10);
+                }
+            }
         }
     }
 };
