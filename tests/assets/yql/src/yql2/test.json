@@ -1,0 +1,13 @@
+{
+    "name": "yql2",
+    "postexec": [
+        "./scripts/postexec.js"
+    ],
+    "builds": {
+        "yql2": {
+            "jsfiles": [
+                "yql.js"
+            ]
+        }
+    }
+}

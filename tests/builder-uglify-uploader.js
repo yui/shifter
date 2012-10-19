@@ -34,11 +34,10 @@ var tests = {
                     var self = this;
 
                     shifter.init({
-                        silent: true,
+                        quiet: true,
                         cwd: srcBase,
-                        istanbul: true,
                         lint: false,
-                        'global-config': false,
+                        'global-config': true,
                         'cache': false
                     }, this.callback);
                 },

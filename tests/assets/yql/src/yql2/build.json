@@ -1,10 +1,7 @@
 {
-    "name": "yql",
-    "postbuilds": [
-        "yql2"
-    ],
+    "name": "yql2",
     "builds": {
-        "yql": {
+        "yql2": {
             "exec": [
                 "shifter --config test.json",
                 "echo 'Foobar'"
