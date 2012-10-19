@@ -36,7 +36,6 @@ var tests = {
                     shifter.init({
                         quiet: true,
                         cwd: srcBase,
-                        lint: false,
                         'global-config': true,
                         'cache': false
                     }, this.callback);

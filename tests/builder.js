@@ -34,6 +34,8 @@ var tests = {
                 topic: function() {
                     shifter.init({
                         cwd: srcBase,
+                        lint: false,
+                        csslint: false,
                         compressor: true,
                         'global-config': false,
                         'cache': false

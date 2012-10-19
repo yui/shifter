@@ -22,6 +22,7 @@ var argsTests = {
     '--semi': 'semi',
     '--istanbul': 'istanbul',
     '--progress': 'progress',
+    '--csslint': 'csslint',
     '--coverage': 'coverage',
     '--lint-stderr': 'lint-stderr',
     '-w': 'walk'
@@ -56,6 +57,14 @@ var tests = {
         },
         'cache should be false': function(topic) {
             assert.equal(topic.cache, false);
+        }
+    },
+    'should parse --no-csslint': {
+        topic: function() {
+            return args.parse(['', '', '--no-csslint']);
+        },
+        'csslint should be false': function(topic) {
+            assert.isFalse(topic.csslint);
         }
     },
     'should parse --no-lint': {

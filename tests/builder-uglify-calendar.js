@@ -44,6 +44,7 @@ var tests = {
                         cwd: srcBase,
                         'global-config': false,
                         'lint-stderr': true,
+                        csslint: false,
                         fail: true,
                         'cache': false
                     }, function() {
