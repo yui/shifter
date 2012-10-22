@@ -39,7 +39,7 @@ var tests = {
                         code = c;
                     };
 
-                    shifter.init({
+                    shifter.add({
                         silent: true,
                         cwd: srcBase,
                         'global-config': false,
