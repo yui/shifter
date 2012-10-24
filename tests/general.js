@@ -188,6 +188,47 @@ var tests = {
             assert.isNull(topic);
         }
     },
+    'md5check should err on matching sums': {
+        topic: function() {
+            var self = this,
+                md5check = require('../lib/tasks/md5').md5check;
+
+            md5check({
+                error: true,
+                current: path.join(__dirname, 'assets/prepend.txt')
+            }, {
+                result: 'PREPEND',
+                constructor: function(result) {
+                }
+            }, function(err, blob) {
+                self.callback(null, err);
+            });
+        },
+        'should have proper error message': function(topic) {
+            assert.ok(topic);
+            assert.equal(topic, 'file has not changed, bailing the build');
+        }
+    },
+    'md5check should not err on matching sums if error: false': {
+        topic: function() {
+            var self = this,
+                md5check = require('../lib/tasks/md5').md5check;
+
+            md5check({
+                error: false,
+                current: path.join(__dirname, 'assets/prepend.txt')
+            }, {
+                result: 'PREPEND',
+                constructor: function(result) {
+                }
+            }, function(err, blob) {
+                self.callback(null, err);
+            });
+        },
+        'should have null error': function(topic) {
+            assert.isNull(topic);
+        }
+    },
     'md5check should not err': {
         topic: function() {
             var self = this,
