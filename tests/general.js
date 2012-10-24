@@ -570,6 +570,7 @@ var tests = {
             },
             'compress with no options': {
                 topic: function(topic) {
+                    process.env.SHIFTER_COMPRESSOR_TASKS = 0;
                     topic(null, {
                         result: "var foo = bar;",
                         constructor: function(result) {
@@ -587,6 +588,7 @@ var tests = {
             'compress with error': {
                 topic: function(topic) {
                     var self = this;
+                    delete process.env.SHIFTER_COMPRESSOR_TASKS;
                     topic(null, {
                         result: "var foo + bar;",
                         constructor: function(result) {
