@@ -107,6 +107,51 @@ var tests = {
         },
         "json should have loader meta": function(topic) {
             assert.ok(topic.json.builds.yql.config);
+        },
+        'munging the pack, with a BAD shifter config': {
+            topic: function() {
+                var self = this,
+                    _exit = process.exit,
+                    cwd = path.join(__dirname, 'assets/badmeta');
+
+                shifter.cwd = function() {
+                    return cwd;
+                };
+
+                process.exit = function(code) {
+                    process.exit = _exit;
+                    self.callback(null, {
+                        code: code
+                    });
+                };
+                
+                pack.munge({
+                    "name": "yql",
+                    "builds": {
+                        "yql": {
+                            "jsfiles": [
+                                "yql.js"
+                            ]
+                        }
+                    },
+                    "rollups": {
+                        "yql": {
+                            files: []
+                        },
+                        "foo": {
+                            files: []
+                        }
+                    },
+                    "shifter": {
+                        spec: true,
+                        foo: true
+                    }
+                }, {}, function(json, opts) {
+                });
+            },
+            "should exit with code 1": function(topic) {
+                assert.equal(topic.code, 1);
+            }
         }
     },
     'should throw on uglify error in callback': {
