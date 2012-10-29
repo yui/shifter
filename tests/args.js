@@ -24,6 +24,7 @@ var argsTests = {
     '--progress': 'progress',
     '--csslint': 'csslint',
     '--coverage': 'coverage',
+    '--clean': 'clean',
     '--lint-stderr': 'lint-stderr',
     '-w': 'walk'
 };
