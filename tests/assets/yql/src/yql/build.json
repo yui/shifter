@@ -14,7 +14,8 @@
             ],
             "jsfiles": [
                 "yql.js"
-            ]
+            ],
+            "cssfiles": []
         }
     }
 }
