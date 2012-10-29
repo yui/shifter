@@ -179,16 +179,16 @@
     <h1>Code coverage report for <span class='entity'>lib/args.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>100% <small>(41 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>100% <small>(42 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>100% <small>(60 / 60)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>100% <small>(64 / 64)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class='metric'>100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>100% <small>(41 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>100% <small>(42 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">lib/</a> &#187; args.js</div>
@@ -292,7 +292,9 @@
 95
 96
 97
-98</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+98
+99
+100</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -329,9 +331,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">57</span>
-<span class="cline-any cline-yes">57</span>
+<span class="cline-any cline-yes">58</span>
+<span class="cline-any cline-yes">58</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -348,39 +351,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">45</span>
-<span class="cline-any cline-yes">45</span>
-<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
+<span class="cline-any cline-yes">46</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">52</span>
+<span class="cline-any cline-yes">53</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">50</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">51</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
-<span class="cline-any cline-yes">52</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
+<span class="cline-any cline-yes">53</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">44</span>
-<span class="cline-any cline-yes">44</span>
+<span class="cline-any cline-yes">45</span>
+<span class="cline-any cline-yes">45</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -412,6 +416,7 @@ var nopt = require('nopt'),
         cache: Boolean,
         jsstamp: Boolean,
         list: Boolean,
+        clean: Boolean,
         config: require('path'),
         lint: [ 'config', false ],
         csslint: Boolean,
@@ -470,6 +475,7 @@ var setDefaults = function(parsed) {
     parsed.istanbul = (parsed.istanbul === undefined || parsed.istanbul === false) ? false : true;
     parsed.quiet = (parsed.quiet === undefined || parsed.quiet === false) ? false : true;
     parsed.silent = (parsed.silent === undefined || parsed.silent === false) ? false : true;
+    parsed.clean = (parsed.clean === undefined || parsed.clean === false) ? false : true;
     parsed['lint-stderr'] = (parsed['lint-stderr'] === undefined || parsed['lint-stderr'] === false) ? false : true;
     parsed.progress = (parsed.progress === undefined || parsed.progress === false) ? false : true;
     return parsed;
@@ -491,7 +497,7 @@ exports.known = known;
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Thu Oct 25 2012 08:16:51 GMT-0500 (CDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Oct 29 2012 09:07:52 GMT-0500 (CDT)</div>
 </div>
 </body>
 

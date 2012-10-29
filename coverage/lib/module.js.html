@@ -179,16 +179,16 @@
     <h1>Code coverage report for <span class='entity'>lib/module.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>89.08% <small>(310 / 348)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>88.6% <small>(311 / 351)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>72.36% <small>(144 / 199)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>71.98% <small>(149 / 207)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class='metric'>95% <small>(57 / 60)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>89.08% <small>(310 / 348)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>88.6% <small>(311 / 351)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">lib/</a> &#187; module.js</div>
@@ -1058,7 +1058,16 @@
 861
 862
 863
-864</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1651,8 +1660,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14</span>
 <span class="cline-any cline-yes">14</span>
-<span class="cline-any cline-yes">238</span>
-<span class="cline-any cline-yes">238</span>
+<span class="cline-any cline-yes">252</span>
+<span class="cline-any cline-yes">252</span>
 <span class="cline-any cline-yes">9</span>
 <span class="cline-any cline-yes">9</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1699,7 +1708,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13</span>
 <span class="cline-any cline-yes">13</span>
-<span class="cline-any cline-yes">13</span>
 <span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1726,6 +1734,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13</span>
 <span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2534,7 +2552,7 @@ var setReplacers = function (options) {
 };
 &nbsp;
 var build = function (mod, name, options, callback) {
-    var stack = new Stack();
+    var stack = new Stack(), _build;
 &nbsp;
     if (options.lint === false) {
         defaultLint = options.lint;
@@ -2560,9 +2578,8 @@ var build = function (mod, name, options, callback) {
     lintSTDError = options['lint-stderr'];
     mod.stamp = options.jsstamp;
 &nbsp;
-    log.info('deleting build dir: ' + path.join(buildDir, name || <span class="branch-1 cbranch-no" title="branch not covered" >mod.name)</span>);
-    rimraf(path.join(buildDir, name || <span class="branch-1 cbranch-no" title="branch not covered" >mod.name)</span>, stack.add(function() {
-        if (mod.jsfiles) {
+    _build = stack.add(function() {
+        if (mod.jsfiles &amp;&amp; mod.jsfiles.length) {
             exports.js(mod, name, stack.add(function (err) {
                 <span class="missing-if-branch" title="if path not taken"" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >                    log.warn('skipping coverage file build due to previous build error');</span>
@@ -2583,14 +2600,24 @@ var build = function (mod, name, options, callback) {
                 }
             }));
         }
-        if (mod.cssfiles) {
+        if (mod.cssfiles &amp;&amp; mod.cssfiles.length) {
             exports.css(mod, name, stack.add(noop));
         }
 &nbsp;
-        if (mod.copy) {
+        if (mod.copy &amp;&amp; mod.copy.length) {
             exports.copy(mod, name, stack.add(noop));
         }
-    }));
+    });
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken"" >I</span>if (options.clean) {
+<span class="cstat-no" title="statement not covered" >        log.info('deleting build dir: ' + path.join(buildDir, name || mod.name));</span>
+<span class="cstat-no" title="statement not covered" >        rimraf(path.join(buildDir, name || mod.name), _build);</span>
+    } else {
+        _build();
+    }
+&nbsp;
+&nbsp;
+    
 &nbsp;
     stack.done(function () {
         <span class="missing-if-branch" title="else path not taken"" >E</span>if (!stack.complete) {
@@ -2789,7 +2816,7 @@ exports.rollup = function (mods, callback) {
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Thu Oct 25 2012 08:16:51 GMT-0500 (CDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Oct 29 2012 09:07:52 GMT-0500 (CDT)</div>
 </div>
 </body>
 
