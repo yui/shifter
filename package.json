@@ -19,7 +19,8 @@
         "rimraf": "*",
         "istanbul": "~0.1.8",
         "which": "*",
-        "yuglify": "~0.1.0"
+        "yuglify": "~0.1.0",
+        "timethat": "~0.0.1"
     },
     "devDependencies": {
         "selleck": "*",

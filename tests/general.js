@@ -2,7 +2,6 @@ var vows = require('vows'),
     assert = require('assert'),
     fs = require('fs'),
     path = require('path'),
-    timer = require('../lib/timer'),
     pack = require('../lib/pack'),
     shifter = require('../lib/'),
     Stack = require('../lib/stack').Stack,
@@ -41,28 +40,6 @@ var tests = {
         },
         'should have null file': function(topic) {
             assert.isNull(topic.file);
-        }
-    },
-    //No way to simulate this without hourly tests
-    'timer should work with hours': {
-        topic: function() {
-            var start = new Date('1/1/2010 3:00:00'),
-                end = new Date('1/1/2110 5:43:21');
-            return timer.calc(start.getTime(), end.getTime());
-        },
-        'should print': function(topic) {
-            assert.equal(topic, '2 hours, 43 minutes, 21 seconds');
-        }
-    },
-    //No way to simulate this without tests taking forever
-    'timer should work with minutes': {
-        topic: function() {
-            var start = new Date('1/1/2010 3:00:00'),
-                end = new Date('1/1/2110 3:21:01');
-            return timer.calc(start.getTime(), end.getTime());
-        },
-        'should print': function(topic) {
-            assert.equal(topic, '21 minutes, 1 seconds');
         }
     },
     'munging the pack, with a shifter config': {
