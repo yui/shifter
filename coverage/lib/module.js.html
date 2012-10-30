@@ -179,16 +179,16 @@
     <h1>Code coverage report for <span class='entity'>lib/module.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>88.6% <small>(311 / 351)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>88.67% <small>(313 / 353)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>71.98% <small>(149 / 207)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>72.25% <small>(151 / 209)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class='metric'>95% <small>(57 / 60)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>88.6% <small>(311 / 351)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>88.67% <small>(313 / 353)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">lib/</a> &#187; module.js</div>
@@ -1067,7 +1067,11 @@
 870
 871
 872
-873</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+873
+874
+875
+876
+877</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1153,10 +1157,10 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">9</span>
-<span class="cline-any cline-yes">9</span>
-<span class="cline-any cline-yes">9</span>
 <span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -1200,11 +1204,11 @@
 <span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-yes">9</span>
 <span class="cline-any cline-yes">9</span>
-<span class="cline-any cline-yes">500</span>
-<span class="cline-any cline-yes">500</span>
-<span class="cline-any cline-yes">500</span>
-<span class="cline-any cline-yes">500</span>
-<span class="cline-any cline-yes">500</span>
+<span class="cline-any cline-yes">498</span>
+<span class="cline-any cline-yes">498</span>
+<span class="cline-any cline-yes">498</span>
+<span class="cline-any cline-yes">498</span>
+<span class="cline-any cline-yes">498</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1246,6 +1250,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11</span>
 <span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1296,14 +1304,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2117,7 +2125,11 @@ var Stack = require('./stack').Stack,
             delete config.after;
         }
         var str = JSON.stringify(config);
-        str = str.replace(/:/g, ': ').replace(/,/g, ', ');
+        if (str.length &gt; 100) {
+            str = JSON.stringify(config, null, 4);
+        } else {
+            str = str.replace(/:/g, ': ').replace(/,/g, ', ');
+        }
         <span class="missing-if-branch" title="if path not taken"" >I</span>if (str === '{}' || str === '[]') {
 <span class="cstat-no" title="statement not covered" >            str = '';</span>
         }
@@ -2166,19 +2178,19 @@ var buildCSS = function (mod, name, callback) {
 &nbsp;
     queue.read(resolve(mod.cssfiles, 'css'))
         .concat()
-        .cssstamp({
-            stamp: '/* YUI CSS Detection Stamp */\n#yui3-css-stamp.' + name + ' { display: none; }'
-        })
         .replace(replaceOptions);
 &nbsp;
     <span class="missing-if-branch" title="else path not taken"" >E</span>if (defaultLint &amp;&amp; cssLint) {
         queue.csslint(cssLintConfig);
     }
 &nbsp;
-    queue.md5check({
-        error: cacheBuild,
-        current: path.join(buildDir, name, name + '.css')
-    })
+    queue.cssstamp({
+            stamp: '/* YUI CSS Detection Stamp */\n#yui3-css-stamp.' + name + ' { display: none; }'
+        })
+        .md5check({
+            error: cacheBuild,
+            current: path.join(buildDir, name, name + '.css')
+        })
         .check()
         .write(path.join(buildDir, name, name + '.css'))
         .cssmin()
@@ -2715,7 +2727,7 @@ var _rollup = function (mod, name, options, callback) {
     }),
         modName = mod.name || name,
         fileName = mod.basefilename || name,
-        postfix = "YUI.add('" + modName + "', function (Y, NAME) {" +
+        postfix = "@YUIGLOBALVAR@.add('" + modName + "', function (@YUIVAR@, NAME) {" +
             (options.strict ? <span class="branch-0 cbranch-no" title="branch not covered" >'"use strict"; ' </span>: "") + "}, '@VERSION@'" + stringify(mod.config) + ");\n";
         regex = (typeof mod.regex !== 'undefined') ? <span class="branch-0 cbranch-no" title="branch not covered" >mod.regex </span>: loggerRegex,
         files = [];
@@ -2816,7 +2828,7 @@ exports.rollup = function (mods, callback) {
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Oct 29 2012 09:07:52 GMT-0500 (CDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Oct 30 2012 10:31:03 GMT-0500 (CDT)</div>
 </div>
 </body>
 
