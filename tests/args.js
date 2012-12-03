@@ -235,6 +235,22 @@ var tests = {
             assert.isFalse(topic['lint-stderr']);
         }
     },
+    'should parse --build-dir': {
+        topic: function() {
+            return args.parse(['', '', '--build-dir', '/test']);
+        },
+        'should be "/test"': function(topic) {
+            assert.equal('/test', topic['build-dir']);
+        }
+    },
+    'should set default build-dir to "../../build"': {
+        topic: function() {
+            return args.parse(['', '']);
+        },
+        'should be "../../build"': function(topic) {
+            assert.equal(topic['build-dir'], '../../build');
+        }
+    },
     'args.has(foo) (not an argument)': {
         topic: function() {
             return args.has('foo')
