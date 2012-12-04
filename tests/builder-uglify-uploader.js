@@ -7,7 +7,7 @@ var vows = require('vows'),
     shifter = require('../lib'),
     base = path.join(__dirname, 'assets/yql/'),
     crypto = require('crypto'),
-    buildBase = path.join(base, 'build'),
+    buildBase = path.join(__dirname, 'assets-global'),
     buildXBase = path.join(base, 'build-uglify'),
     srcBase = path.join(base, 'src/uploader'),
     rimraf = require('rimraf');
@@ -16,12 +16,12 @@ var vows = require('vows'),
 var tests = {
     'clean build': {
         topic: function() {
-            rimraf(path.join(buildBase, 'uploader'), this.callback);
+            rimraf(path.join(buildBase), this.callback);
         },
         'should not have build dir and': {
             topic: function() {
                 var self = this;
-                fs.stat(path.join(buildBase, 'uploader'), function(err) {
+                fs.stat(path.join(buildBase), function(err) {
                     self.callback(null, err);
                 });
             },

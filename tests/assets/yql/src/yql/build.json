@@ -6,7 +6,7 @@
     "builds": {
         "yql": {
             "exec": [
-                "shifter --config test.json",
+                "shifter --config test.json --no-global-config",
                 "echo 'Foobar'"
             ],
             "postexec": [
