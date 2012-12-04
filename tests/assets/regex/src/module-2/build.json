@@ -1,0 +1,11 @@
+{
+    "name": "module-2",
+    "builds": {
+        "module-2": {
+            "regex": "^.*?(?:logger|Y.log).*?(?:;|\\).*;|(?:\\r?\\n.*?)*?\\).*;).*;?.*?\\r?\\n",
+            "jsfiles": [
+                "module-2.js"
+            ]
+        }
+    }
+}
