@@ -179,16 +179,16 @@
     <h1>Code coverage report for <span class='entity'>lib/index.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>73.26% <small>(63 / 86)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>74.44% <small>(67 / 90)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>54.76% <small>(23 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>56.82% <small>(25 / 44)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class='metric'>90.91% <small>(10 / 11)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>73.26% <small>(63 / 86)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>74.44% <small>(67 / 90)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">lib/</a> &#187; index.js</div>
@@ -355,7 +355,16 @@
 158
 159
 160
-161</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -373,7 +382,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">77</span>
+<span class="cline-any cline-yes">83</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -412,10 +421,13 @@
 <span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -429,11 +441,17 @@
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">4</span>
-<span class="cline-any cline-yes">4</span>
-<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -572,13 +590,16 @@ exports.init = function (opts, initCallback) {
     <span class="missing-if-branch" title="else path not taken"" >E</span>if (!buildFile) {
         buildFile = path.join(CWD, 'build.json');
     }
+&nbsp;
+    globalBuildDir = false;
     buildRunning = true;
 &nbsp;
     buildFileName = path.basename(buildFile);
 &nbsp;
     options.buildFile = buildFile;
     options.buildFileName = buildFileName;
-    
+    options['build-dir'] = path.resolve(exports.cwd(), options['build-dir']);
+&nbsp;
     <span class="missing-if-branch" title="if path not taken"" >I</span>if (options.version || options.help) {
 <span class="cstat-no" title="statement not covered" >        require('./help');</span>
 <span class="cstat-no" title="statement not covered" >        return;</span>
@@ -589,17 +610,23 @@ exports.init = function (opts, initCallback) {
         find(CWD, '.shifter.json', function(err, file) {
             <span class="missing-if-branch" title="else path not taken"" >E</span>if (file) {
                 log.info('woohoo, found a config here: ' + file);
+&nbsp;
                 var json = JSON.parse(fs.readFileSync(file, 'utf8'));
                 Object.keys(json).forEach(function(key) {
                     <span class="missing-if-branch" title="else path not taken"" >E</span>if (!args.has(key)) {
                         log.info('override config found for ' + key);
                         options[key] = json[key];
+&nbsp;
+                        // Special case to determine whether we should resolve
+                        // the build directory relative to the global config.
+                        if (key === 'build-dir') {
+                            options['build-dir'] = path.resolve(path.dirname(file), json[key]);
+                        }
                     }
                 });
             }
         });
     }
-&nbsp;
 &nbsp;
     <span class="missing-if-branch" title="if path not taken"" >I</span>if (options.watch) {
 <span class="cstat-no" title="statement not covered" >        watch = require('./watch');</span>
@@ -680,7 +707,7 @@ exports.init = function (opts, initCallback) {
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Nov 12 2012 20:31:22 GMT-0600 (CST)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Dec 03 2012 18:16:02 GMT-0600 (CST)</div>
 </div>
 </body>
 

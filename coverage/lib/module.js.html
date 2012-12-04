@@ -1072,7 +1072,8 @@
 875
 876
 877
-878</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+878
+879</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1098,7 +1099,7 @@
 <span class="cline-any cline-yes">53</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">53</span>
-<span class="cline-any cline-yes">710</span>
+<span class="cline-any cline-yes">694</span>
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1267,7 +1268,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -1293,7 +1293,6 @@
 <span class="cline-any cline-yes">7</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -1670,8 +1669,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14</span>
 <span class="cline-any cline-yes">14</span>
-<span class="cline-any cline-yes">252</span>
-<span class="cline-any cline-yes">252</span>
+<span class="cline-any cline-yes">266</span>
+<span class="cline-any cline-yes">266</span>
 <span class="cline-any cline-yes">9</span>
 <span class="cline-any cline-yes">9</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1824,6 +1823,9 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-yes">2</span>
@@ -1924,10 +1926,10 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">3</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2140,7 +2142,6 @@ var Stack = require('./stack').Stack,
         }
         return str;
     },
-    buildDir = path.join(shifter.cwd(), '../../build'),
     loggerRegex = /^.*?(?:logger|Y.log).*?(?:;|\).*;|(?:\r?\n.*?)*?\).*;).*;?.*?\r?\n/mg;
 &nbsp;
 &nbsp;
@@ -2171,7 +2172,6 @@ exports.reset = function() {
 };
 &nbsp;
 exports.loggerRegex = loggerRegex;
-exports.buildDir = buildDir;
 &nbsp;
 var buildCSS = function (mod, name, callback) {
     var queue = new Queue({
@@ -2192,13 +2192,13 @@ var buildCSS = function (mod, name, callback) {
         })
         .md5check({
             error: cacheBuild,
-            current: path.join(buildDir, name, name + '.css')
+            current: path.join(mod.buildDir, name, name + '.css')
         })
         .check()
-        .write(path.join(buildDir, name, name + '.css'))
+        .write(path.join(mod.buildDir, name, name + '.css'))
         .cssmin()
         .check()
-        .write(path.join(buildDir, name, name + '-min.css'))
+        .write(path.join(mod.buildDir, name, name + '-min.css'))
         .run(function (err) {
             <span class="missing-if-branch" title="if path not taken"" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >                if (/file has not changed/.test(err)) {</span>
@@ -2257,10 +2257,10 @@ var buildJS = function (mod, name, callback) {
 &nbsp;
     queue.md5check({
         error: cacheBuild,
-        current: path.join(buildDir, fileName, fileName + '-debug.js')
+        current: path.join(mod.buildDir, fileName, fileName + '-debug.js')
     })
         .check()
-        .write(path.join(buildDir, fileName, fileName + '-debug.js'));
+        .write(path.join(mod.buildDir, fileName, fileName + '-debug.js'));
 &nbsp;
     <span class="missing-if-branch" title="else path not taken"" >E</span>if (regex) {
         queue.replace({
@@ -2270,13 +2270,13 @@ var buildJS = function (mod, name, callback) {
 &nbsp;
     queue.log('writing RAW file')
         .check()
-        .write(path.join(buildDir, fileName, fileName + '.js'))
+        .write(path.join(mod.buildDir, fileName, fileName + '.js'))
         .log('compressing ' + path.join(fileName, fileName + '.js with ' + cName[compressorFn]));
 &nbsp;
     queue[compressorFn](compressorConfig)
         .log('writing -min file')
         .check()
-        .write(path.join(buildDir, fileName, fileName + '-min.js'))
+        .write(path.join(mod.buildDir, fileName, fileName + '-min.js'))
         .run(function (err, result) {
             <span class="missing-if-branch" title="if path not taken"" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >                if (/file has not changed/.test(err)) {</span>
@@ -2304,7 +2304,7 @@ var buildCoverage = function (mod, name, callback) {
         fileName = mod.basefilename || name;
 &nbsp;
     queue.read([
-        path.join(buildDir, fileName, fileName + '.js')
+        path.join(mod.buildDir, fileName, fileName + '.js')
     ])
         .log('coverage file read, starting coverage for: ' + fileName + '/' + fileName + '.js')
         .coverage({
@@ -2315,7 +2315,7 @@ var buildCoverage = function (mod, name, callback) {
         .replace(replaceOptions)
         .check()
         .log('writing coverage file to ' + fileName + '/' + fileName + '-coverage.js')
-        .write(path.join(buildDir, fileName, fileName + '-coverage.js'))
+        .write(path.join(mod.buildDir, fileName, fileName + '-coverage.js'))
         .run(function (err) {
             <span class="missing-if-branch" title="if path not taken"" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >                log.err('coverage: ' + err);</span>
@@ -2370,7 +2370,7 @@ var buildLang = function (mod, name, callback) {
 &nbsp;
         queue[compressorFn](compressorConfig)
             .check()
-            .write(path.join(buildDir, name, 'lang', fileName))
+            .write(path.join(mod.buildDir, name, 'lang', fileName))
             .run(stack.add(function (err) {
                 <span class="missing-if-branch" title="if path not taken"" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >                    log.err('lang: ' + err);</span>
@@ -2389,7 +2389,7 @@ exports.lang = buildLang;
 &nbsp;
 var copyAssets = function (mod, name, callback) {
     var from = path.join(shifter.cwd(), 'assets'),
-        to = path.join(buildDir, name, 'assets');
+        to = path.join(mod.buildDir, name, 'assets');
 &nbsp;
     if (exists(from)) {
         log.info('shifting assets for ' + name);
@@ -2405,7 +2405,7 @@ var buildSkin = function (mod, name, callback) {
     var stack = new Stack(),
         subMod = '',
         from = path.join(shifter.cwd(), 'assets'),
-        to = path.join(buildDir, name, 'assets');
+        to = path.join(mod.buildDir, name, 'assets');
 &nbsp;
     <span class="missing-if-branch" title="else path not taken"" >E</span>if (exists(path.join(shifter.cwd(), 'assets', name))) {
         log.info('found a subskin, shifting for ' + name);
@@ -2451,7 +2451,7 @@ var buildSkin = function (mod, name, callback) {
                         .cssmin()
                         .check()
                         .log('writing skin file with core wrapper')
-                        .write(path.join(buildDir, name, 'assets', 'skins', skinName, name + '.css'))
+                        .write(path.join(mod.buildDir, name, 'assets', 'skins', skinName, name + '.css'))
                         .run(stack.add(function (err) {
                             <span class="missing-if-branch" title="if path not taken"" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >                                log.err(err);</span>
@@ -2471,7 +2471,7 @@ var buildSkin = function (mod, name, callback) {
                             ])
                                 .check()
                                 .log('writing skin file without core wrapper')
-                                .write(path.join(buildDir, name, 'assets', 'skins', skinName, name + '-skin.css'))
+                                .write(path.join(mod.buildDir, name, 'assets', 'skins', skinName, name + '-skin.css'))
                                 .run(stack.add(function () {
                                 }));
                         }));
@@ -2625,14 +2625,14 @@ var build = function (mod, name, options, callback) {
     });
 &nbsp;
     <span class="missing-if-branch" title="if path not taken"" >I</span>if (options.clean) {
-<span class="cstat-no" title="statement not covered" >        log.info('deleting build dir: ' + path.join(buildDir, name || mod.name));</span>
-<span class="cstat-no" title="statement not covered" >        rimraf(path.join(buildDir, name || mod.name), _build);</span>
+<span class="cstat-no" title="statement not covered" >        log.info('deleting build dir: ' + path.join(mod.buildDir, name || mod.name));</span>
+<span class="cstat-no" title="statement not covered" >        rimraf(path.join(mod.buildDir, name || mod.name), _build);</span>
     } else {
         _build();
     }
 &nbsp;
 &nbsp;
-    
+&nbsp;
 &nbsp;
     stack.done(function () {
         <span class="missing-if-branch" title="else path not taken"" >E</span>if (!stack.complete) {
@@ -2701,6 +2701,9 @@ var exec = function (exec, name, callback) {
 exports.exec = exec;
 &nbsp;
 exports.build = function (mod, name, options, callback) {
+    
+    mod.buildDir = options['build-dir'];
+&nbsp;
     var end = function () {
         if (mod.postexec) {
             exec(mod.postexec, name, callback);
@@ -2747,7 +2750,7 @@ var _rollup = function (mod, name, options, callback) {
         .replace(replaceOptions)
         .log('writing rollup file ' + path.join(fileName, fileName + '-debug.js'))
         .check()
-        .write(path.join(buildDir, fileName, fileName + '-debug.js'));
+        .write(path.join(mod.buildDir, fileName, fileName + '-debug.js'));
 &nbsp;
     <span class="missing-if-branch" title="else path not taken"" >E</span>if (regex) {
         queue.replace({
@@ -2761,13 +2764,13 @@ var _rollup = function (mod, name, options, callback) {
 &nbsp;
     queue.log('linting done, writing ' + path.join(fileName, fileName + '.js'))
         .check()
-        .write(path.join(buildDir, fileName, fileName + '.js'))
+        .write(path.join(mod.buildDir, fileName, fileName + '.js'))
         .log('compressing ' + path.join(fileName, fileName + '.js with ' + cName[compressorFn]));
 &nbsp;
     queue[compressorFn](compressorConfig)
         .check()
         .log('compressing done, writing ' + path.join(fileName, fileName + '-min.js'))
-        .write(path.join(buildDir, fileName, fileName + '-min.js'))
+        .write(path.join(mod.buildDir, fileName, fileName + '-min.js'))
         .run(function (err) {
             <span class="missing-if-branch" title="if path not taken"" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >                log.error(name + ' rollup: ' + err);</span>
@@ -2831,7 +2834,7 @@ exports.rollup = function (mods, callback) {
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Nov 12 2012 20:31:22 GMT-0600 (CST)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Dec 03 2012 18:16:02 GMT-0600 (CST)</div>
 </div>
 </body>
 
