@@ -11,6 +11,7 @@ var argsTests = {
     '--strict': 'strict',
     '--cache': 'cache',
     '--walk': 'walk',
+    '--recursive': 'recursive',
     '--watch': 'watch',
     '--quiet': 'quiet',
     '--ant': 'ant',
