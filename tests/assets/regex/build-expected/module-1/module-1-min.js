@@ -1,0 +1,1 @@
+YUI.add("module-1",function(e,t){console.log("want to see this 1"),console.log("want to see this 2"),console.log("want to see this 3"),console.log("want to see this 4"),console.log("want to see this 5")},"@VERSION@",{skinnable:!1});

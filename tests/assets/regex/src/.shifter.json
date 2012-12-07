@@ -1,0 +1,6 @@
+{
+    "regex": "^.*?(?:logger|Y.log).*?(?:;|\\).*;|(?:\\r?\\n.*?)*?\\).*;).*;?.*?\\r?\\n|^.*?(?:\/\\*@DBG\\*\/).*\\r?\\n",
+    "lint": false,
+    "coverage": false,
+    "silent": false
+}

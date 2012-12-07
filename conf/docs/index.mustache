@@ -217,7 +217,7 @@ merge them together, so your results may vary on this.</p>
                 "use": [
                     "yui-log",
                     "yui-later"
-                ]   
+                ]
             },
             "files": [
                 "yui-base",
@@ -306,7 +306,8 @@ Below is an example `.shifter.json`:
     "replace-yuivar": "F",
     "replace-version": "1.2.3.4",
     "lint": false,
-    "coverage": false
+    "coverage": false,
+    "regex": "^.*?(?:logger|Y.log).*?(?:;|\\).*;|(?:\\r?\\n.*?)*?\\).*;).*;?.*?\\r?\\n|^.*?(?:\/\\*@DBG\\*\/).*\\r?\\n"
 }
 ```
 <p>
@@ -338,7 +339,8 @@ You can force `shifter` to ignore this file with the `--no-global-config` option
     <td>`regex`</td>
     <td>`String` A regex to apply to the build to remove `Y.log` statements, the default is:<br>
     `/^.*?(?:logger|Y.log).*?(?:;|\).*;|(?:\r?\n.*?)*?\).*;).*;?.*?\r?\n/mg`<br>
-    <em>an empty string here bypasses this</em></td>
+    <em>This string overrides the one defined in .shifter.json</em><br/>
+    <em>An empty string here disable this behavior for that specific build.</em></td>
 </tr>
 <tr>
     <td>`prependfiles`</td>
@@ -460,7 +462,7 @@ If there is an issue with compressing your module with Uglify, you can revert to
 <h3 id="exp.lint-stderr">Forcing lint to stderr</h3>
 
 <p>
-By default, lint warnings/errors are printed to `stdout`. But in the case that you want to trap that in logs or in a CI system, 
+By default, lint warnings/errors are printed to `stdout`. But in the case that you want to trap that in logs or in a CI system,
 I've added a `--lint-stderr` config option which forces all lint output to `stderr`.
 </p>
 
