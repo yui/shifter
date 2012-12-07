@@ -23,7 +23,7 @@
     <div class="yui3-g">
         <div class="yui3-u-3-4">
             <div id="main">
-                <div class="content"><h2 id="welcome-to-shifter-0210">welcome to shifter 0.2.10!</h2>
+                <div class="content"><h2 id="welcome-to-shifter-0211">welcome to shifter 0.2.11!</h2>
 
 <div class="intro">
 <center>
@@ -51,7 +51,7 @@
 
 <pre class="code terminal"><span class="noselect">$ </span>shifter -h
 
-blazingly fast builds with shifter@0.2.10
+blazingly fast builds with shifter@0.2.11
 
 pass no arguments and shifter will build the module from the current directory
 
@@ -236,7 +236,7 @@ merge them together, so your results may vary on this.</p>
                 &quot;use&quot;: [
                     &quot;yui-log&quot;,
                     &quot;yui-later&quot;
-                ]   
+                ]
             },
             &quot;files&quot;: [
                 &quot;yui-base&quot;,
@@ -323,7 +323,8 @@ Below is an example <code>.shifter.json</code>:
     &quot;replace-yuivar&quot;: &quot;F&quot;,
     &quot;replace-version&quot;: &quot;1.2.3.4&quot;,
     &quot;lint&quot;: false,
-    &quot;coverage&quot;: false
+    &quot;coverage&quot;: false,
+    &quot;regex&quot;: &quot;^.*?(?:logger|Y.log).*?(?:;|\\).*;|(?:\\r?\\n.*?)*?\\).*;).*;?.*?\\r?\\n|^.*?(?:\&#x2F;\\*@DBG\\*\&#x2F;).*\\r?\\n&quot;
 }</pre>
 
 <p>
@@ -355,7 +356,8 @@ You can force <code>shifter</code> to ignore this file with the <code>--no-globa
     <td><code>regex</code></td>
     <td><code>String</code> A regex to apply to the build to remove <code>Y.log</code> statements, the default is:<br>
     <code>&#x2F;^.*?(?:logger|Y.log).*?(?:;|\).*;|(?:\r?\n.*?)*?\).*;).*;?.*?\r?\n&#x2F;mg</code><br>
-    <em>an empty string here bypasses this</em></td>
+    <em>This string overrides the one defined in .shifter.json</em><br/>
+    <em>An empty string here disable this behavior for that specific build.</em></td>
 </tr>
 <tr>
     <td><code>prependfiles</code></td>
@@ -475,7 +477,7 @@ If there is an issue with compressing your module with Uglify, you can revert to
 <h3 id="exp.lint-stderr">Forcing lint to stderr</h3>
 
 <p>
-By default, lint warnings/errors are printed to <code>stdout</code>. But in the case that you want to trap that in logs or in a CI system, 
+By default, lint warnings/errors are printed to <code>stdout</code>. But in the case that you want to trap that in logs or in a CI system,
 I've added a <code>--lint-stderr</code> config option which forces all lint output to <code>stderr</code>.
 </p>
 
@@ -528,7 +530,7 @@ I've added a <code>--lint-stderr</code> config option which forces all lint outp
                         <div class="bd">
                             <ul class="toc">
 <li>
-<a href="#welcome-to-shifter-0210">welcome to shifter 0.2.10!</a>
+<a href="#welcome-to-shifter-0211">welcome to shifter 0.2.11!</a>
 </li>
 <li>
 <a href="#what">what is shifter?</a>
