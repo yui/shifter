@@ -179,16 +179,16 @@
     <h1>Code coverage report for <span class='entity'>lib/log.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>95.45% <small>(42 / 44)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>95.24% <small>(40 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>93.75% <small>(15 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>90% <small>(18 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class='metric'>100% <small>(11 / 11)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>95.45% <small>(42 / 44)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>95.24% <small>(40 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">lib/</a> &#187; log.js</div>
@@ -280,23 +280,18 @@
 83
 84
 85
-86
-87</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+86</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -312,16 +307,19 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">11</span>
 <span class="cline-any cline-yes">11</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1020</span>
+<span class="cline-any cline-yes">11</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1020</span>
+<span class="cline-any cline-yes">11</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1137</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1137</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">212</span>
@@ -373,16 +371,12 @@ Code licensed under the BSD License:
 http://yuilibrary.com/license/
 */
 var color = require('ansi-color').set;
-var hasColor = false;
-var stdio;
+var hasColor = process.stdin.isTTY;
+&nbsp;
 var quiet;
 var silent;
-try {
-    stdio = require("stdio");
-<span class="cstat-no" title="statement not covered" >    hasColor = stdio.isStderrATTY();</span>
-} catch (ex) {
-    hasColor = true;
-}
+&nbsp;
+var prefix;
 &nbsp;
 exports.isTTY = hasColor;
 &nbsp;
@@ -395,9 +389,13 @@ exports.silent = function () {
     quiet = true;
 };
 &nbsp;
-exports.reset = function() {
+exports.reset = function(options) {
     silent = false;
     quiet = false;
+    <span class="missing-if-branch" title="if path not taken"" >I</span>if (options &amp;&amp; options.color === false) {
+<span class="cstat-no" title="statement not covered" >        hasColor = false;</span>
+    }
+    prefix = exports.color('shifter', 'magenta');
 };
 &nbsp;
 exports.color = function (str, code) {
@@ -407,36 +405,35 @@ exports.color = function (str, code) {
     return color(str, code);
 };
 &nbsp;
-var prefix = exports.color('shifter', 'magenta');
 &nbsp;
 exports.info = function (str) {
     if (!quiet) {
-        console.log(prefix, color('[info]', 'white'), str);
+        console.log(prefix, exports.color('[info]', 'white'), str);
     }
 };
 &nbsp;
 exports.log = function (str) {
     if (!quiet) {
-        console.log(prefix, color('[queu]', 'cyan'), str);
+        console.log(prefix, exports.color('[queu]', 'cyan'), str);
     }
 };
 &nbsp;
 exports.warn = function (str) {
     if (!silent) {
-        console.log(prefix, color('[warn]', 'yellow'), str);
+        console.log(prefix, exports.color('[warn]', 'yellow'), str);
     }
 };
 &nbsp;
 exports.error = function (str) {
     if (!silent) {
-        console.error(prefix, color('[error]', 'red'), str);
+        console.error(prefix, exports.color('[error]', 'red'), str);
     }
     process.exit(1);
 };
 &nbsp;
 exports.err = function (str) {
     if (!silent) {
-        console.error(prefix, color('[err]', 'red'), str);
+        console.error(prefix, exports.color('[err]', 'red'), str);
     }
 };
 &nbsp;
@@ -458,7 +455,7 @@ exports.console = {
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Fri Dec 07 2012 08:54:06 GMT-0600 (CST)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Dec 11 2012 11:58:34 GMT-0600 (CST)</div>
 </div>
 </body>
 
