@@ -20,7 +20,8 @@
         "istanbul": "~0.1.8",
         "which": "*",
         "yuglify": "~0.1.0",
-        "timethat": "~0.0.1"
+        "timethat": "~0.0.1",
+        "findit": "~0.1.2"
     },
     "devDependencies": {
         "selleck": "*",
