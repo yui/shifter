@@ -16,4 +16,4 @@ YUI.add('module-2', function (Y, NAME) {
 
 
 
-}, '@VERSION@', {"skinnable": true});
+}, '@VERSION@', {"skinnable": true, "skins": []});

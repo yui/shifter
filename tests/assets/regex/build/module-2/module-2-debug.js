@@ -19,4 +19,4 @@ YUI.add('module-2', function (Y, NAME) {
   var j = 0; Y.log("hello 3!", "info", "AVE AVE");
 
 
-}, '@VERSION@', {"skinnable": true});
+}, '@VERSION@', {"skinnable": true, "skins": []});
