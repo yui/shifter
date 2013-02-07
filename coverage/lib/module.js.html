@@ -181,16 +181,16 @@
     <h1>Code coverage report for <span class='entity'>lib/module.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>89.01% <small>(316 / 355)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>89.08% <small>(318 / 357)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>74.42% <small>(160 / 215)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>74.65% <small>(162 / 217)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Functions: <span class='metric'>95% <small>(57 / 60)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>89.01% <small>(316 / 355)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>89.08% <small>(318 / 357)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">lib/</a> &#187; module.js</div>
@@ -1079,7 +1079,25 @@
 880
 881
 882
-883</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1328,6 +1346,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1582,6 +1605,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1596,6 +1624,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1676,8 +1709,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16</span>
 <span class="cline-any cline-yes">16</span>
-<span class="cline-any cline-yes">338</span>
-<span class="cline-any cline-yes">338</span>
+<span class="cline-any cline-yes">341</span>
+<span class="cline-any cline-yes">341</span>
 <span class="cline-any cline-yes">9</span>
 <span class="cline-any cline-yes">9</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1733,6 +1766,9 @@
 <span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-yes">4</span>
@@ -2205,6 +2241,11 @@ var buildCSS = function (mod, name, callback) {
             current: path.join(mod.buildDir, name, name + '.css')
         })
         .check()
+        .cssproc({
+            url: mod.cssproc,
+            root: mod.buildDir,
+            file: path.join(mod.buildDir, name, name + '.css')
+        })
         .write(path.join(mod.buildDir, name, name + '.css'))
         .cssmin()
         .check()
@@ -2459,6 +2500,11 @@ var buildSkin = function (mod, name, callback) {
                         stamp: '/* YUI CSS Detection Stamp */\n#yui3-css-stamp.skin-' + skinName + '-' + name + ' { display: none; }'
                     })
                         .replace(replaceOptions)
+                        .cssproc({
+                            url: mod.cssproc,
+                            root: mod.buildDir,
+                            file: path.join(mod.buildDir, name, 'assets', 'skins', skinName, name + '.css')
+                        })
                         .cssmin()
                         .check()
                         .log('writing skin file with core wrapper')
@@ -2481,6 +2527,11 @@ var buildSkin = function (mod, name, callback) {
                                 path.join(base, name + '-skin.css')
                             ])
                                 .check()
+                                .cssproc({
+                                    url: mod.cssproc,
+                                    root: mod.buildDir,
+                                    file: path.join(mod.buildDir, name, 'assets', 'skins', skinName, name + '-skin.css')
+                                })
                                 .log('writing skin file without core wrapper')
                                 .write(path.join(mod.buildDir, name, 'assets', 'skins', skinName, name + '-skin.css'))
                                 .run(stack.add(function () {
@@ -2615,6 +2666,9 @@ var build = function (mod, name, options, callback) {
                         exports.coverage(mod, name, stack.add(noop));
                     } else {
                         log.warn('skipping coverage file from config');
+                    }
+                    if (options.cssproc) {
+                        mod.cssproc = options.cssproc;
                     }
                     if ((mod.config &amp;&amp; mod.config.skinnable) || mod.skinnable) {
                         exports.skin(mod, name, stack.add(noop));
@@ -2848,7 +2902,7 @@ exports.rollup = function (mods, callback) {
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Tue Feb 05 2013 13:14:36 GMT-0600 (CST)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Thu Feb 07 2013 09:41:53 GMT-0600 (CST)</div>
 </div>
 </body>
 
