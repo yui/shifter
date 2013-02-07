@@ -46,7 +46,8 @@ var tests = {
                         'lint-stderr': true,
                         csslint: false,
                         fail: true,
-                        'cache': false
+                        'cache': false,
+                        cssproc: 'http://foobar.com/baz/'
                     }, function() {
                         process.exit = _exit;
                         self.callback(null, {
@@ -100,6 +101,15 @@ var tests = {
                     'should create build/calendar/assets/skins/sam/calendar.css': function(err, stat) {
                         assert.isNull(err);
                         assert.isTrue(stat.isFile());
+                    }
+                },
+                'should create assets/skins/sam/calendar-skin.css and': {
+                    topic: function() {
+                        fs.readFile(path.join(buildBase, 'calendar', 'assets', 'skins', 'sam', 'calendar-skin.css'), this.callback);
+                    },
+                    'should have processed the relative CSS files': function(err, stat) {
+                        assert.isNull(err);
+                        assert.isTrue(stat.toString().indexOf('http://foobar.com/baz/calendar/assets/skins/sam/my-image.png') > -1);
                     }
                 },
                 'should produce same files and': {
