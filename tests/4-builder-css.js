@@ -47,6 +47,18 @@ var tests = {
                         assert.isTrue(stat.isDirectory());
                     }
                 },
+                'should replace content and': {
+                    topic: function() {
+                        var file = path.join(buildBase, 'cssreset', 'cssreset.css');
+                        return fs.readFileSync(file, 'utf8');
+                    },
+                    'should not have @ tokens': function(topic) {
+                        assert.isFalse(/@/.test(topic));
+                    },
+                    'should have replace token': function(topic) {
+                        assert.isTrue(/#davglass/.test(topic));
+                    }
+                },
                 'should produce same files and': {
                     topic: function() {
                         var stack = new Stack();

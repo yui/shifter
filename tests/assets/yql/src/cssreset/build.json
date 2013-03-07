@@ -4,7 +4,10 @@
         "cssreset": {
             "cssfiles": [
                 "cssreset.css"
-            ]
+            ],
+            "replace": {
+                "@SHIFTERCSS@": "color: #davglass"
+            }
         }
     }
 }
