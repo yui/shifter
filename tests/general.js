@@ -383,7 +383,7 @@ var tests = {
                     }, this.callback);
                 },
                 'should have the data': function(topic) {
-                    assert.equal(topic.get(), 'PREPEND\nfoobar');
+                    assert.equal(topic.get(), '\nPREPEND\nfoobar');
                 }
             }
         },
