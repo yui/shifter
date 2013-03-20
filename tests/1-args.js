@@ -133,30 +133,6 @@ var tests = {
             assert.equal(topic.fail, true);
         }
     },
-    'should parse --lint preferred': {
-        topic: function() {
-            return args.parse(['', '', '--lint', 'preferred']);
-        },
-        'should parse defaults': function(topic) {
-            assert.equal(topic.lint, 'preferred');
-        }
-    },
-    'should parse --lint foobar as preferred': {
-        topic: function() {
-            return args.parse(['', '', '--lint', 'foobar']);
-        },
-        'should parse defaults': function(topic) {
-            assert.equal(topic.lint, 'preferred');
-        }
-    },
-    'should parse no --lint as preferred': {
-        topic: function() {
-            return args.parse(['', '']);
-        },
-        'should parse defaults': function(topic) {
-            assert.equal(topic.lint, 'preferred');
-        }
-    },
     'should parse -m foo': {
         topic: function() {
             return args.parse(['', '', '-m', 'foo']);
