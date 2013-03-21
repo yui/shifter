@@ -37,7 +37,7 @@ var tests = {
                         compressor: true,
                         'global-config': false,
                         cache: false,
-                        config: path.join(srcBase, 'foo.js')
+                        'yui-module': path.join(srcBase, 'foo.js')
                     }, this.callback);
                 },
                 'should create build dir and': {
