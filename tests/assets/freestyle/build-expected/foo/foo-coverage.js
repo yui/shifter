@@ -1,39 +1,6 @@
-if (typeof _yuitest_coverage == "undefined"){
-    _yuitest_coverage = {};
-    _yuitest_coverline = function(src, line){
-        var coverage = _yuitest_coverage[src];
-        if (!coverage.lines[line]){
-            coverage.calledLines++;
-        }
-        coverage.lines[line]++;
-    };
-    _yuitest_coverfunc = function(src, name, line){
-        var coverage = _yuitest_coverage[src],
-            funcId = name + ":" + line;
-        if (!coverage.functions[funcId]){
-            coverage.calledFunctions++;
-        }
-        coverage.functions[funcId]++;
-    };
+if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
+if (!__coverage__['build/foo/foo.js']) {
+   __coverage__['build/foo/foo.js'] = {"path":"build/foo/foo.js","s":{"1":0,"2":0},"b":{},"f":{"1":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":15},"end":{"line":1,"column":34}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":3,"column":39}},"2":{"start":{"line":2,"column":4},"end":{"line":2,"column":16}}},"branchMap":{},"code":["(function () { YUI.add('foo', function (Y, NAME) {","    Y[NAME] = 1;","}, '@VERSION@', {\"requires\": [\"bar\"]});","","}());"]};
 }
-_yuitest_coverage["build/foo/foo.js"] = {
-    lines: {},
-    functions: {},
-    coveredLines: 0,
-    calledLines: 0,
-    coveredFunctions: 0,
-    calledFunctions: 0,
-    path: "build/foo/foo.js",
-    code: []
-};
-_yuitest_coverage["build/foo/foo.js"].code=["YUI.add('foo', function (Y, NAME) {","    Y[NAME] = 1;","}, '@VERSION@', {\"requires\": [\"bar\"]});"];
-_yuitest_coverage["build/foo/foo.js"].lines = {"1":0,"2":0};
-_yuitest_coverage["build/foo/foo.js"].functions = {"(anonymous 1):1":0};
-_yuitest_coverage["build/foo/foo.js"].coveredLines = 2;
-_yuitest_coverage["build/foo/foo.js"].coveredFunctions = 1;
-_yuitest_coverline("build/foo/foo.js", 1);
-YUI.add('foo', function (Y, NAME) {
-    _yuitest_coverfunc("build/foo/foo.js", "(anonymous 1)", 1);
-_yuitest_coverline("build/foo/foo.js", 2);
-Y[NAME] = 1;
-}, '@VERSION@', {"requires": ["bar"]});
+var __cov_y$IUoFrzcr$trVZ7P9g9kw = __coverage__['build/foo/foo.js'];
+__cov_y$IUoFrzcr$trVZ7P9g9kw.s['1']++;YUI.add('foo',function(Y,NAME){__cov_y$IUoFrzcr$trVZ7P9g9kw.f['1']++;__cov_y$IUoFrzcr$trVZ7P9g9kw.s['2']++;Y[NAME]=1;},'@VERSION@',{'requires':['bar']});
