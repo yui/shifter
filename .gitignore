@@ -10,4 +10,5 @@ CVS/
 .com.apple.timemachine.supported
 tests/assets/yql/build/*/*
 tests/assets-global
+tests/assets/freestyle/build
 coverage
