@@ -1,5 +1,5 @@
 {
   "projectName": "shifter - blazingly fast yui builder",
-  "version": "0.2.29",
+  "version": "0.3.0",
   "yuiSeedUrl": "http://yui.yahooapis.com/3.6.0/build/yui/yui.js"
 }
