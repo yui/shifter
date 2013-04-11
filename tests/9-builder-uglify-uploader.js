@@ -3,7 +3,6 @@ var vows = require('vows'),
     path = require('path'),
     fs = require('fs'),
     Stack = require('../lib/stack').Stack,
-    spawn = require('child_process').spawn,
     shifter = require('../lib'),
     base = path.join(__dirname, 'assets/yql/'),
     crypto = require('crypto'),
@@ -29,10 +28,8 @@ var tests = {
                 assert.isNotNull(err);
                 assert.equal(err.code, 'ENOENT');
             },
-            'should build Calendar and': {
+            'should build Uploader and': {
                 topic: function() {
-                    var self = this;
-
                     shifter.init({
                         quiet: true,
                         cwd: srcBase,
@@ -99,7 +96,7 @@ var tests = {
                                 }
                             });
                         }));
-                        
+
                         fs.readdir(path.join(buildXBase, 'uploader'), stack.add(function(err, files) {
                             files.forEach(function(file) {
                                 if (path.extname(file) === '.js') {
@@ -114,7 +111,7 @@ var tests = {
                                 }
                             });
                         }));
-                        
+
                         stack.done(function() {
                             self.callback(null, results);
                         });
