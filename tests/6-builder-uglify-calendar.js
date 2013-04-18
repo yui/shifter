@@ -11,8 +11,8 @@ var vows = require('vows'),
     srcBase = path.join(base, 'src/calendar'),
     rimraf = require('rimraf');
 
-
-var tests = {
+function createTests() {
+return {
     'clean build': {
         topic: function() {
             rimraf(path.join(buildBase, 'calendar'), this.callback);
@@ -28,7 +28,8 @@ var tests = {
                 assert.isNotNull(err);
                 assert.equal(err.code, 'ENOENT');
             },
-            'should build Calendar and': {
+            'should build Calendar and': (function() {
+                var context = {
                 topic: function() {
                     var self = this,
                         _exit = process.exit,
@@ -66,15 +67,6 @@ var tests = {
                         assert.isTrue(stat.isDirectory());
                     }
                 },
-                'should create assets dir and': {
-                    topic: function() {
-                        fs.stat(path.join(buildBase, 'calendar', 'assets'), this.callback);
-                    },
-                    'should create build/calendar/assets': function(err, stat) {
-                        assert.isNull(err);
-                        assert.isTrue(stat.isDirectory());
-                    }
-                },
                 'should create lang dir and': {
                     topic: function() {
                         fs.stat(path.join(buildBase, 'calendar', 'lang'), this.callback);
@@ -82,33 +74,6 @@ var tests = {
                     'should create build/calendar/lang': function(err, stat) {
                         assert.isNull(err);
                         assert.isTrue(stat.isDirectory());
-                    }
-                },
-                'should create assets/skins/sam/ dir and': {
-                    topic: function() {
-                        fs.stat(path.join(buildBase, 'calendar', 'assets', 'skins', 'sam'), this.callback);
-                    },
-                    'should create build/calendar/assets/skins/sam': function(err, stat) {
-                        assert.isNull(err);
-                        assert.isTrue(stat.isDirectory());
-                    }
-                },
-                'should create assets/skins/sam/calendar.css and': {
-                    topic: function() {
-                        fs.stat(path.join(buildBase, 'calendar', 'assets', 'skins', 'sam', 'calendar.css'), this.callback);
-                    },
-                    'should create build/calendar/assets/skins/sam/calendar.css': function(err, stat) {
-                        assert.isNull(err);
-                        assert.isTrue(stat.isFile());
-                    }
-                },
-                'should create assets/skins/sam/calendar-skin.css and': {
-                    topic: function() {
-                        fs.readFile(path.join(buildBase, 'calendar', 'assets', 'skins', 'sam', 'calendar-skin.css'), this.callback);
-                    },
-                    'should have processed the relative CSS files': function(err, stat) {
-                        assert.isNull(err);
-                        assert.isTrue(stat.toString().indexOf('http://foobar.com/baz/calendar/assets/skins/sam/my-image.png') > -1);
                     }
                 },
                 'should produce same files and': {
@@ -134,7 +99,7 @@ var tests = {
                                 }
                             });
                         }));
-                        
+
                         fs.readdir(path.join(buildXBase, 'calendar'), stack.add(function(err, files) {
                             files.forEach(function(file) {
                                 if (path.extname(file) === '.js') {
@@ -149,7 +114,7 @@ var tests = {
                                 }
                             });
                         }));
-                        
+
                         stack.done(function() {
                             self.callback(null, results);
                         });
@@ -168,9 +133,50 @@ var tests = {
                         assert.equal(results.pre['calendar-coverage.js'], results.post['calendar-coverage.js']);
                     }
                 }
-            }
+                };
+
+                context['should create assets dir and'] = {
+                    topic: function() {
+                        fs.stat(path.join(buildBase, 'calendar', 'assets'), this.callback);
+                    },
+                    'should create build/calendar/assets': function(err, stat) {
+                        assert.isNull(err);
+                        assert.isTrue(stat.isDirectory());
+                    }
+                };
+                context['should create assets/skins/sam/ dir and'] = {
+                    topic: function() {
+                        fs.stat(path.join(buildBase, 'calendar', 'assets', 'skins', 'sam'), this.callback);
+                    },
+                    'should create build/calendar/assets/skins/sam': function(err, stat) {
+                        assert.isNull(err);
+                        assert.isTrue(stat.isDirectory());
+                    }
+                };
+                context['should create assets/skins/sam/calendar.css and'] = {
+                    topic: function() {
+                        fs.stat(path.join(buildBase, 'calendar', 'assets', 'skins', 'sam', 'calendar.css'), this.callback);
+                    },
+                    'should create build/calendar/assets/skins/sam/calendar.css': function(err, stat) {
+                        assert.isNull(err);
+                        assert.isTrue(stat.isFile());
+                    }
+                };
+                context['should create assets/skins/sam/calendar-skin.css and'] = {
+                    topic: function() {
+                        fs.readFile(path.join(buildBase, 'calendar', 'assets', 'skins', 'sam', 'calendar-skin.css'), this.callback);
+                    },
+                    'should have processed the relative CSS files': function(err, stat) {
+                        assert.isNull(err);
+                        assert.isTrue(stat.toString().indexOf('http://foobar.com/baz/calendar/assets/skins/sam/my-image.png') > -1);
+                    }
+                };
+
+                return context;
+            }())
         }
     }
 };
+}
 
-vows.describe('building calendar with UglifyJS').addBatch(tests).export(module);
+vows.describe('building calendar with UglifyJS').addBatch(createTests()).export(module);
