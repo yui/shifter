@@ -11,11 +11,16 @@ var vows = require('vows'),
     srcBase = path.join(base, 'src/calendar'),
     rimraf = require('rimraf');
 
-function createTests() {
+function createTests(buildSkin) {
     return {
         'clean build': {
             topic: function() {
-                rimraf(path.join(buildBase, 'calendar'), this.callback);
+                var self = this;
+                rimraf(path.join(buildBase, 'calendar-base'), function() {
+                    rimraf(path.join(buildBase, 'calendarnavigator'), function() {
+                        rimraf(path.join(buildBase, 'calendar'), self.callback);
+                    });
+                });
             },
             'should not have build dir and': {
                 topic: function() {
@@ -47,7 +52,8 @@ function createTests() {
                                 csslint: false,
                                 fail: true,
                                 'cache': false,
-                                cssproc: 'http://foobar.com/baz/'
+                                cssproc: 'http://foobar.com/baz/',
+                                assets: buildSkin
                             }, function() {
                                 process.exit = _exit;
                                 self.callback(null, {
@@ -135,6 +141,7 @@ function createTests() {
                         }
                     };
 
+                    if (buildSkin) {
                         context['should create assets dir and'] = {
                             topic: function() {
                                 fs.stat(path.join(buildBase, 'calendar', 'assets'), this.callback);
@@ -171,6 +178,20 @@ function createTests() {
                                 assert.isTrue(stat.toString().indexOf('http://foobar.com/baz/calendar/assets/skins/sam/my-image.png') > -1);
                             }
                         };
+                    } else {
+                        context['should not create assets dir and'] = {
+                            topic: function() {
+                                var self = this;
+                                fs.stat(path.join(buildBase, 'calendar', 'assets'), function(err) {
+                                    self.callback(null, err);
+                                });
+                            },
+                            'should not create build/calendar/assets': function(foo, err) {
+                                assert.isNotNull(err);
+                                assert.equal(err.code, 'ENOENT');
+                            }
+                        };
+                    }
 
                     return context;
                 }())
@@ -179,4 +200,5 @@ function createTests() {
     };
 }
 
-vows.describe('building calendar with UglifyJS').addBatch(createTests()).export(module);
+vows.describe('building calendar with UglifyJS').addBatch(createTests(true)).export(module);
+vows.describe('building calendar with UglifyJS and --no-assets').addBatch(createTests(false)).export(module);

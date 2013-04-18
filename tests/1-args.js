@@ -23,6 +23,7 @@ var argsTests = {
     '--semi': 'semi',
     '--istanbul': 'istanbul',
     '--progress': 'progress',
+    '--assets': 'assets',
     '--csslint': 'csslint',
     '--coverage': 'coverage',
     '--clean': 'clean',
@@ -107,6 +108,14 @@ var tests = {
         },
         'semi should be false': function(topic) {
             assert.isFalse(topic.semi);
+        }
+    },
+    'should parse --no-assets': {
+        topic: function() {
+            return args.parse(['', '', '--no-assets']);
+        },
+        'assets should be false': function(topic) {
+            assert.isFalse(topic.assets);
         }
     },
     'should not parse --no-fail': {
