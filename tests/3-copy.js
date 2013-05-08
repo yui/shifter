@@ -31,7 +31,8 @@ var tests = {
             'should copy': {
                 topic: function() {
                     shifter.add({
-                        cwd: srcBase
+                        cwd: srcBase,
+                        'global-config': false
                     }, this.callback);
                 },
                 'should create out/1 and': {
