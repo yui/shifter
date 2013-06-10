@@ -1,0 +1,11 @@
+{
+    "name": "csswithassets",
+    "builds": {
+        "csswithassets": {
+            "cssfiles": [
+                "csswithassets.css"
+            ],
+            "assets": true
+        }
+    }
+}

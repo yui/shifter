@@ -1,0 +1,6 @@
+.foo {
+    background-image: url("http://domain.name/path/csswithassets/assets/img.png");
+}
+
+/* YUI CSS Detection Stamp */
+#yui3-css-stamp.csswithassets { display: none; }
