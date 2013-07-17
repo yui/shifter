@@ -17,7 +17,7 @@
         "cpr": "~0.0.6",
         "mkdirp": "*",
         "rimraf": "*",
-        "istanbul": "~0.1.8",
+        "istanbul": "0.1.37",
         "which": "*",
         "yuglify": "~0.1.0",
         "timethat": "~0.0.1",
