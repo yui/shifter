@@ -102,6 +102,27 @@ var tests = {
                     'coverage should be same': function(err, results) {
                         assert.equal(results.pre['yql-coverage.js'], results.post['yql-coverage.js']);
                     }
+                },
+                'should respect mod.assets=false and': {
+                    topic: function() {
+                        var self = this;
+                        fs.stat(path.join(buildBase, 'yql', 'assets'), function (err) {
+                            self.callback(null, err);
+                        });
+                    },
+                    'should not create build/yql/assets': function(foo, err) {
+                        assert.isNotNull(err);
+                        assert.equal(err.code, 'ENOENT');
+                    }
+                },
+                'should copy assets in postbuild and': {
+                    topic: function() {
+                        fs.stat(path.join(buildBase, 'yql2', 'assets'), this.callback);
+                    },
+                    'should create build/yql2/assets': function(err, stat) {
+                        assert.isNull(err);
+                        assert.isTrue(stat.isDirectory());
+                    }
                 }
             }
         }

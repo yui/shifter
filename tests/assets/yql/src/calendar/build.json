@@ -2,6 +2,7 @@
     "name": "calendar",
     "builds": {
         "calendar-base": {
+            "assets": false,
             "jsfiles": [
                 "calendar-base.js"
             ]

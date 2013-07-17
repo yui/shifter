@@ -178,6 +178,15 @@ function createTests(buildSkin) {
                                 assert.isTrue(stat.toString().indexOf('http://foobar.com/baz/calendar/assets/skins/sam/my-image.png') > -1);
                             }
                         };
+                        context['should create calendar-base/assets dir and'] = {
+                            topic: function() {
+                                fs.stat(path.join(buildBase, 'calendar-base', 'assets'), this.callback);
+                            },
+                            'should override mod.assets=false when skinnable': function(err, stat) {
+                                assert.isNull(err);
+                                assert.isTrue(stat.isDirectory());
+                            }
+                        };
                     } else {
                         context['should not create assets dir and'] = {
                             topic: function() {
