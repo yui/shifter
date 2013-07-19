@@ -5,6 +5,7 @@
     ],
     "builds": {
         "yql": {
+            "assets": false,
             "exec": [
                 "shifter --config test.json --no-global-config",
                 "echo 'Foobar'"
