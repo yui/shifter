@@ -2,7 +2,7 @@
     "name": "shifter",
     "description": "New YUI build tool based on Gearjs, so let's shift some gears",
     "author": "Dav Glass <davglass@gmail.com>",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "dependencies": {
         "progress": "~0.1.0",
         "ansi-color": "*",
@@ -37,7 +37,8 @@
     },
     "scripts": {
         "pretest": "jshint --config ./node_modules/yui-lint/jshint.json ./lib/ ./lib/tasks/",
-        "test": "istanbul cover --print both vows -- --spec ./tests/*.js"
+        "test": "istanbul cover --print both vows -- --spec ./tests/*.js",
+        "docs": "node scripts/versions.js; node ./node_modules/.bin/selleck --out ./output"
     },
     "preferGlobal": "true",
     "bugs": { "url" : "http://github.com/yui/shifter/issues" },
