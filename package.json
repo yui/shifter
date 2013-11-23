@@ -6,7 +6,7 @@
     "dependencies": {
         "progress": "~0.1.0",
         "ansi-color": "*",
-        "gear": "~0.7.0",
+        "gear": "~0.8.0",
         "gear-lib": "~0.8.0",
         "nopt": "*",
         "yuitest-coverage": ">=0.0.5",
