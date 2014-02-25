@@ -1,0 +1,10 @@
+{
+    "name": "yql23",
+    "builds": {
+        "yql": {
+            "jsfiles": [
+                "yql.js"
+            ]
+        }
+    }
+}

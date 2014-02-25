@@ -474,6 +474,8 @@ foo.bar = function () {
 If there is an issue with compressing your module with Uglify, you can revert to using YUI Compressor with the <code>--compressor</code> flag.
 </p>
 
+<p>UglifyJS parsing errors are now propagated through Shifter's callback routines so that the build does not terminate if Shifter is called programmatically.</p>
+
 <h3 id="exp.lint-stderr">Forcing lint to stderr</h3>
 
 <p>
