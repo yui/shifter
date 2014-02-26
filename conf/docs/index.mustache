@@ -459,8 +459,6 @@ foo.bar = function () {
 If there is an issue with compressing your module with Uglify, you can revert to using YUI Compressor with the `--compressor` flag.
 </p>
 
-<p>UglifyJS parse errors are now propagated through Shifter's callback routines so that the build does not terminate if Shifter is called programmatically.</p>
-
 <h3 id="exp.lint-stderr">Forcing lint to stderr</h3>
 
 <p>
@@ -486,4 +484,10 @@ I've added a `--lint-stderr` config option which forces all lint output to `stde
 
 <p>
     Adding `--recursive` to the `--walk` command will tell `shifter` to walk the directories recursively looking for `build.json` files. 
+</p>
+
+<h3 id="exp.err.hand.prog">Error handling when shifter is called programmatically</h3>
+
+<p>
+    When `shifter` is called programmatically, build errors such as UglifyJS parsing errors, are propagated through callback routines. This allows another external build process that uses `shifter` to handle the errors accordingly.
 </p>

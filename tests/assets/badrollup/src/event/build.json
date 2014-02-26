@@ -1,0 +1,30 @@
+{
+    "name": "event",
+    "builds": {
+        "event-base-ie": {
+            "prependfiles": [
+                "js/event-ready-base-ie.js"
+            ],
+            "jsfiles": [
+                "event-facade-dom-ie.js"
+            ]
+        }
+    },
+    "rollups": {
+        "event-base": {
+            "files": [
+                "event-base-ie"
+            ],
+            "build": {
+                "event-base-ie": {
+                    "prependfiles": [
+                        "js/event-ready-base-ie.js"
+                    ],
+                    "jsfiles": [
+                        "event-facade-dom-ie.js"
+                    ]
+                }
+            }
+        }
+    }
+}
