@@ -71,8 +71,8 @@ var tests = {
                     spec: true,
                     foo: true
                 }
-            }, {}, function(json, opts) {
-                self.callback(null, {
+            }, {}, function(err, json, opts) {
+                self.callback(err, {
                     json: json,
                     options: opts
                 });
@@ -88,20 +88,12 @@ var tests = {
         'munging the pack, with a BAD shifter config': {
             topic: function() {
                 var self = this,
-                    _exit = process.exit,
                     cwd = path.join(__dirname, 'assets/badmeta');
 
                 shifter.cwd = function() {
                     return cwd;
                 };
 
-                process.exit = function(code) {
-                    process.exit = _exit;
-                    self.callback(null, {
-                        code: code
-                    });
-                };
-                
                 pack.munge({
                     "name": "yql",
                     "builds": {
@@ -123,11 +115,13 @@ var tests = {
                         spec: true,
                         foo: true
                     }
-                }, {}, function(json, opts) {
+                }, {}, function(err, json, opts) {
+                    self.callback(null, err);
                 });
             },
-            "should exit with code 1": function(topic) {
-                assert.equal(topic.code, 1);
+            "should callback with an error": function(topic) {
+                assert.ok(topic);
+                assert.equal(topic, 'hitting the brakes! failed to parse bad.json, syntax error?');
             }
         }
     },
@@ -292,23 +286,6 @@ var tests = {
             topic.quiet();
             topic.console.log('test console.log');
             topic.console.error('test console.error');
-        },
-        'testing log.error': function(topic) {
-            var exit = process.exit,
-                status;
-            process.exit = function(code) {
-                status = code;
-            };
-
-            topic.error('foobar');
-            assert.equal(status, 1);
-            status = null;
-            topic.reset();
-            topic.silent();
-            topic.error('foobar');
-            assert.equal(status, 1);
-
-            process.exit = exit;
         }
     },
     'general tasks': {
