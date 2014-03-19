@@ -1,0 +1,24 @@
+{
+    "name": "something",
+    "builds": {
+        "foo": {
+            "jsfiles": [
+                "foo.js"
+            ]
+        }
+    },
+    "rollups": {
+        "something-foo": {
+            "files": [
+                "foo"
+            ],
+            "build": {
+                "foo": {
+                    "jsfiles": [
+                        "foo.js"
+                    ]
+                }
+            }
+        }
+    }
+}

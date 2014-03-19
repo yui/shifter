@@ -1,9 +1,9 @@
 {
-    "name": "yql23",
+    "name": "foo",
     "builds": {
-        "yql": {
+        "foo": {
             "jsfiles": [
-                "yql.js"
+                "foo.js"
             ]
         }
     }
