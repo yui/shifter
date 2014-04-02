@@ -265,6 +265,41 @@ var tests = {
             assert.isFalse(topic.quiet);
             assert.isFalse(topic.cache);
         }
+    },
+    'args.baseOptions should define all of the standard options': {
+        topic: function() {
+            return args.baseOptions();
+        },
+        'should default undefined': function(topic) {
+            assert.isTrue(topic.hasOwnProperty('walk') && topic.walk === undefined);
+            assert.isTrue(topic.hasOwnProperty('cache') && topic.cache === undefined);
+            assert.isTrue(topic.hasOwnProperty('lint') && topic.lint === undefined);
+        },
+        'should not have undefined values': function(topic) {
+            assert.isFalse(topic.hasOwnProperty('foo'));
+            assert.isFalse(topic.hasOwnProperty('bar'));
+            assert.isFalse(topic.hasOwnProperty('baz'));
+        }
+    },
+    'args.baseOptions should allow CLI overrides of options': {
+        topic: function() {
+            return args.baseOptions({
+                cache: true,
+                lint: 'config'
+            });
+        },
+        'should allow overrides': function(topic) {
+            assert.isTrue(topic.cache);
+            assert.equal('config', topic.lint);
+        },
+        'should default undefined': function(topic) {
+            assert.isTrue(topic.hasOwnProperty('walk') && topic.walk === undefined);
+        },
+        'should not have undefined values': function(topic) {
+            assert.isFalse(topic.hasOwnProperty('foo'));
+            assert.isFalse(topic.hasOwnProperty('bar'));
+            assert.isFalse(topic.hasOwnProperty('baz'));
+        }
     }
 };
 
