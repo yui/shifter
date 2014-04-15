@@ -1,0 +1,15 @@
+{
+    "something": {
+        "use": [
+            "something-foo"
+        ],
+        "submodules": {
+            "something-foo": {
+                "requires": [
+                    "bar",
+                    "baz"
+                ]
+            }
+        }
+    }
+}
