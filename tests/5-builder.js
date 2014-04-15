@@ -71,7 +71,7 @@ var tests = {
                                 }(file));
                             });
                         }));
-
+                        
                         fs.readdir(path.join(buildXBase, 'yql'), stack.add(function(err, files) {
                             files.forEach(function(file) {
                                 (function(file) {
@@ -84,7 +84,7 @@ var tests = {
                                 }(file));
                             });
                         }));
-
+                        
                         stack.done(function() {
                             self.callback(null, results);
                         });
