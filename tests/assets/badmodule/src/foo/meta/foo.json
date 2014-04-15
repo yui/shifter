@@ -1,0 +1,8 @@
+{
+    "foo": {
+        "requires": [
+            "bar",
+            "baz"
+        ]
+    }
+}
