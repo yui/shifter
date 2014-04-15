@@ -9,8 +9,6 @@ CVS/
 *~
 .com.apple.timemachine.supported
 tests/assets/yql/build/*/*
-tests/assets/badmodule/build/*/*
-tests/assets/badrollup/build/*/*
 tests/assets-global
 tests/assets/freestyle/build
 coverage

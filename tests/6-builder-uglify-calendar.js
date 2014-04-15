@@ -36,7 +36,13 @@ function createTests(buildSkin) {
                 'should build Calendar and': (function() {
                     var context = {
                         topic: function() {
-                            var self = this;
+                            var self = this,
+                                _exit = process.exit,
+                                code;
+
+                            process.exit = function(c) {
+                                code = c;
+                            };
 
                             shifter.add({
                                 silent: true,
@@ -44,13 +50,19 @@ function createTests(buildSkin) {
                                 'global-config': false,
                                 'lint-stderr': true,
                                 csslint: false,
-                                fail: false,
+                                fail: true,
                                 'cache': false,
                                 cssproc: 'http://foobar.com/baz/',
                                 assets: buildSkin
-                            }, function(err) {
-                                self.callback(err);
+                            }, function() {
+                                process.exit = _exit;
+                                self.callback(null, {
+                                    code: code
+                                });
                             });
+                        },
+                        'should have failed with lint errors': function(topic) {
+                            assert.equal(topic.code, 1);
                         },
                         'should create build dir and': {
                             topic: function() {
