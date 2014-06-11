@@ -258,7 +258,6 @@ var tests = {
             return args.defaults();
         },
         'should do something': function(topic) {
-            console.log(topic);
             assert.ok(topic.jsstamp);
             assert.ok(topic.coverage);
             assert.ok(topic.exec);
