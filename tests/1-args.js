@@ -258,7 +258,7 @@ var tests = {
             return args.defaults();
         },
         'should do something': function(topic) {
-            assert.ok(topic.spec); //from vows
+            console.log(topic);
             assert.ok(topic.jsstamp);
             assert.ok(topic.coverage);
             assert.ok(topic.exec);
