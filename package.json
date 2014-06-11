@@ -11,7 +11,7 @@
         "nopt": "*",
         "yuitest-coverage": ">=0.0.5",
         "yuicompressor": "2.4.7",
-        "yui-lint": "~0.1.1",
+        "yui-lint": "~0.2.0",
         "jshint": "~0.9.0",
         "watch": "~0.8.0",
         "cpr": "~0.0.6",
