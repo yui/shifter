@@ -1,1 +1,1 @@
-YUI.add("bar",function(e,t){e[t]=1},"@VERSION@",{requires:["foo"]});
+YUI.add("bar",function(o,r){o[r]=1},"@VERSION@",{requires:["foo"]});

@@ -1,5 +1,6 @@
 **/node_modules/
-**/npm-debug.log
+*npm-debug.log
+artifacts/
 node_modules/
 tmp/
 CVS/
