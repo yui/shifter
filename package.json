@@ -7,19 +7,19 @@
         "progress": "~0.1.0",
         "ansi-color": "*",
         "gear": "~0.8.0",
-        "gear-lib": "~0.8.0",
+        "gear-lib": "^0.9.2",
         "nopt": "*",
         "yuitest-coverage": ">=0.0.5",
         "yuicompressor": "2.4.7",
         "yui-lint": "~0.2.0",
-        "jshint": "~0.9.0",
+        "jshint": "^2.9.5",
         "watch": "~0.8.0",
         "cpr": "~0.0.6",
         "mkdirp": "*",
         "rimraf": "*",
-        "istanbul": "0.1.37",
+        "istanbul": "^0.4.5",
         "which": "*",
-        "yuglify": "~0.1.0",
+        "yuglify": "^1.0.1",
         "timethat": "~0.0.1",
         "cssproc": "~0.0.1",
         "walkdir": "~0.0.5"
@@ -41,15 +41,17 @@
         "docs": "node scripts/versions.js; node ./node_modules/.bin/selleck --out ./output"
     },
     "preferGlobal": "true",
-    "bugs": { "url" : "http://github.com/yui/shifter/issues" },
-    "licenses":[
+    "bugs": {
+        "url": "http://github.com/yui/shifter/issues"
+    },
+    "licenses": [
         {
-            "type" : "BSD",
-            "url" : "https://github.com/yui/shifter/blob/master/LICENSE"
+            "type": "BSD",
+            "url": "https://github.com/yui/shifter/blob/master/LICENSE"
         }
     ],
     "repository": {
-        "type":"git",
-        "url":"http://github.com/yui/shifter.git"
+        "type": "git",
+        "url": "http://github.com/yui/shifter.git"
     }
 }
