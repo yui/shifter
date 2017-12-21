@@ -19,7 +19,7 @@
     "rimraf": "*",
     "istanbul": "^0.4.5",
     "which": "*",
-    "yuglify": "^1.0.1",
+    "yuglify": "^2.0.0",
     "timethat": "~0.0.1",
     "cssproc": "~0.0.1",
     "walkdir": "~0.0.5"
